@@ -1,0 +1,75 @@
+
+images1.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+loading
+  rotate: false
+  xy: 2, 2
+  size: 640, 1024
+  orig: 640, 1024
+  offset: 0, 0
+  index: -1
+shop
+  rotate: false
+  xy: 2, 1028
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+person
+  rotate: false
+  xy: 644, 2
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+blank
+  rotate: false
+  xy: 1158, 2
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+house
+  rotate: false
+  xy: 644, 516
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+bank
+  rotate: false
+  xy: 1158, 516
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+location
+  rotate: false
+  xy: 644, 1030
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+noconnection
+  rotate: false
+  xy: 2, 1542
+  size: 225, 225
+  orig: 225, 225
+  offset: 0, 0
+  index: -1
+pausebutton
+  rotate: false
+  xy: 2, 1769
+  size: 184, 184
+  orig: 184, 184
+  offset: 0, 0
+  index: -1
+playbutton
+  rotate: false
+  xy: 229, 1542
+  size: 184, 184
+  orig: 184, 184
+  offset: 0, 0
+  index: -1
