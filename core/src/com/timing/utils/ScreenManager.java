@@ -19,7 +19,7 @@ import lombok.Getter;
  */
 
 public class ScreenManager {
-    private Game game;
+    private Game app;
     private static ScreenManager instance;
     private Screen targetScreen;
     private LoadingScreen loadingScreen;
@@ -35,14 +35,14 @@ public class ScreenManager {
     }
 
     public void changeScreen(ScreenType type) {
-        Screen screen = game.getScreen();
+        Screen screen = app.getScreen();
         Gdx.input.setInputProcessor(null);
         Assets.getInstance().clear();
         if (screen != null) {
             screen.dispose();
         }
         resetCamera();
-        game.setScreen(loadingScreen);
+        app.setScreen(loadingScreen);
         currentScreen = type;
         switch (type) {
             case MAIN:
@@ -59,11 +59,11 @@ public class ScreenManager {
     }
 
     public void goToTarget() {
-        game.setScreen(targetScreen);
+        app.setScreen(targetScreen);
     }
 
-    public void init(Game game, SpriteBatch batch) {
-        this.game = game;
+    public void init(Game app, SpriteBatch batch) {
+        this.app = app;
         this.batch = batch;
         this.camera = new OrthographicCamera(Rules.WORLD_WIDTH, Rules.WORLD_HEIGHT);
         this.viewport = new FitViewport(Rules.WORLD_WIDTH, Rules.WORLD_HEIGHT, camera);

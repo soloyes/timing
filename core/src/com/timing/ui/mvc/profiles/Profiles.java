@@ -104,7 +104,7 @@ public class Profiles implements Model<ProfileDAO> {
     private Profiles getInstance() {
         if (instance == null) {
             instance = new Profiles();
-            //First game start
+            //First app start
             ObjectMapper mapper = new ObjectMapper();
             try {
                 if (instance.file.exists()) {

@@ -19,4 +19,6 @@ public interface Controller<T> {
     void select(T t);
 
     List<T> getList();
+
+    public void flush();
 }

@@ -1,15 +1,20 @@
 package com.timing.ui.mvc.profiles;
 
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.timing.config.MSConstants;
@@ -40,10 +45,11 @@ public class VerticalGroupList extends VerticalGroup implements View<ProfileDAO>
     private Map<String, Line> previousLines;
     private List<String> id;
     private BoomBox boomBox;
+    private Skin skin;
 
     public VerticalGroupList() {
         this.boomBox = new BoomBox();
-        Skin skin = Assets.getInstance().getAssetManager().get(PaintConstants.SKIN_FILE);
+        this.skin = Assets.getInstance().getAssetManager().get(PaintConstants.SKIN_FILE);
         this.currentLines = new HashMap<String, Line>();
         this.previousLines = new HashMap<String, Line>();
         this.id = new ArrayList<String>();
@@ -55,11 +61,11 @@ public class VerticalGroupList extends VerticalGroup implements View<ProfileDAO>
         scrollPane.setVisible(false);
         Container<ScrollPane> container = new Container<ScrollPane>(scrollPane);
         container.setPosition(Rules.WORLD_WIDTH / 2, Rules.WORLD_HEIGHT / 2);
+        container.width(2 * Rules.WORLD_WIDTH / 3);
         container.height(Rules.WORLD_HEIGHT / 2);
-        container.width(Rules.WORLD_WIDTH / 2);
         container.align(Align.top);
-        this.setPosition(Rules.WORLD_WIDTH / 4, PaintConstants.PLAY_PROGRESS_BAR_HEIGHT);
-        this.setWidth(Rules.WORLD_WIDTH / 2);
+        this.setPosition(Rules.WORLD_WIDTH / 6, PaintConstants.PLAY_PROGRESS_BAR_HEIGHT);
+        this.setWidth(2 * Rules.WORLD_WIDTH / 3);
         this.setHeight(Rules.WORLD_HEIGHT / 2);
 
         this.addActor(container);
@@ -74,7 +80,7 @@ public class VerticalGroupList extends VerticalGroup implements View<ProfileDAO>
     public void init() {
         verticalGroup.clear();
         verticalGroup.addActor(new Header());
-        boolean hasActive = false;
+
         for (int i = 0; i < controller.getList().size(); i++) {
             ProfileDAO profile = controller.getList().get(i);
             Line line = new Line(profile);
@@ -162,12 +168,12 @@ public class VerticalGroupList extends VerticalGroup implements View<ProfileDAO>
             this.timeAndFlag = new TimeAndFlag();
             this.profile = profile;
             this.table = new Table();
-            table.row().padBottom(22).expandX();
-            Label.LabelStyle style64 = new Label.LabelStyle(
+            table.row().padBottom(10).expandX();
+            Label.LabelStyle style32 = new Label.LabelStyle(
                     Assets.getInstance().getAssetManager().get(PaintConstants.FONT32, BitmapFont.class),
                     new Color(0.8f, 0.43f, 0.33f, 1f)
             );
-            Label minus = new Label("-", style64);
+            Label minus = new Label("-", style32);
             minus.addListener(new ClickListener() {
                 @Override
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -177,7 +183,6 @@ public class VerticalGroupList extends VerticalGroup implements View<ProfileDAO>
                         timeAndFlag.setConfirm(false);
                     }
                     boomBox.playSound(MSConstants.UI_CLICK);
-
                     return true;
                 }
 
@@ -195,22 +200,52 @@ public class VerticalGroupList extends VerticalGroup implements View<ProfileDAO>
                 table.add();
             } else {
                 table.add(minus);
-                Label label = new Label(profile.getName(), style64);
-                label.addListener(new ClickListener() {
+                final TextField textField = new TextField(profile.getName(), skin);
+                //Label label = new Label(profile.getName(), style32);
+//                textField.addListener(new ClickListener() {
+//                    @Override
+//                    public void clicked(InputEvent event, float x, float y) {
+//                        controller.select(profile);
+//                        boomBox.playSound(MSConstants.UI_CHANGED);
+//                    }
+//                });
+                textField.addListener(new InputListener() {
                     @Override
-                    public void clicked(InputEvent event, float x, float y) {
-                        controller.select(profile);
-                        boomBox.playSound(MSConstants.UI_CHANGED);
+                    public boolean keyDown(InputEvent event, int keycode) {
+                        if (keycode == Input.Keys.ENTER) {
+                            profile.setName(textField.getText());
+                            boomBox.playSound(MSConstants.UI_CLICK);
+                            textField.setColor(Color.WHITE);
+                            controller.flush();
+                        }
+                        return super.keyDown(event, keycode);
                     }
                 });
-                table.add(label).center();
+
+                textField.addListener(new ChangeListener() {
+                    @Override
+                    public void changed(ChangeEvent event, Actor actor) {
+                        textField.setColor(Color.RED);
+                        boomBox.playSound(MSConstants.UI_INPUT);
+                    }
+                });
+
+                textField.addListener(new ClickListener() {
+                    @Override
+                    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                        boomBox.playSound(MSConstants.UI_INPUT);
+                        return super.touchDown(event, x, y, pointer, button);
+                    }
+                });
+
                 table.add();
+                table.add(textField).center();
             }
 
             table.align(Align.bottomLeft);
             table.setFillParent(true);
-            this.setWidth(Rules.WORLD_WIDTH / 2);
-            this.setHeight(90);
+            this.setWidth(2 * Rules.WORLD_WIDTH / 3);
+            this.setHeight(64);
             this.addActor(table);
         }
     }
@@ -220,9 +255,14 @@ public class VerticalGroupList extends VerticalGroup implements View<ProfileDAO>
 
         Header() {
             this.table = new Table();
-            table.row().padBottom(22).expandX();
-            Label.LabelStyle style64 = new Label.LabelStyle(
+            table.row().padBottom(10).expandX();
+            Label.LabelStyle style32 = new Label.LabelStyle(
                     Assets.getInstance().getAssetManager().get(PaintConstants.FONT32, BitmapFont.class),
+                    new Color(0.8f, 0.43f, 0.33f, 1f)
+            );
+
+            Label.LabelStyle style64 = new Label.LabelStyle(
+                    Assets.getInstance().getAssetManager().get(PaintConstants.FONT64, BitmapFont.class),
                     new Color(0.8f, 0.43f, 0.33f, 1f)
             );
             Label plus = new Label("+", style64);
@@ -234,18 +274,13 @@ public class VerticalGroupList extends VerticalGroup implements View<ProfileDAO>
                 }
             });
             table.add(plus);
-            table.add(new Label(PaintConstants.UI_ADD_NEW_LINE, style64)).center();
+            table.add(new Label(PaintConstants.UI_ADD_NEW_LINE, style32)).center();
             table.add();
             table.align(Align.bottomLeft);
             table.setFillParent(true);
-            this.setWidth(Rules.WORLD_WIDTH / 2);
-            this.setHeight(90);
+            this.setWidth(2 * Rules.WORLD_WIDTH / 3);
+            this.setHeight(64);
             this.addActor(table);
         }
-    }
-
-    public ProfileDAO addProfile(String username) {
-        setVisible(true);
-        return controller.add(username);
     }
 }

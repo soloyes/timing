@@ -11,7 +11,7 @@ import java.util.Map;
  */
 
 public class AppPreferences {
-    private static final String PREFS_NAME = "shuttleGame_preferences";
+    private static final String PREFS_NAME = "timing_preferences";
 
     private static final String PREF_SOUND_VOLUME = "sound";
     private static final String PREF_EFFECTS_ENABLED = "effects.enabled";

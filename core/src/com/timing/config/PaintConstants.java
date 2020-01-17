@@ -21,8 +21,8 @@ public final class PaintConstants {
     public static final int SET_HEIGHT = 30;
 
     public static final int DUMMY_PROFILES = 5;
-    public static final String UI_EMPTY_PROFILE = "Empty profile";
-    public static final String UI_ADD_NEW_LINE = "Add new line";
+    public static final String UI_EMPTY_PROFILE = "Empty";
+    public static final String UI_ADD_NEW_LINE = "Add new timing";
 
     public static final String FONT32 = "fonts/CollegeRegular32.ttf";
     public static final String FONT64 = "fonts/CollegeRegular64.ttf";
