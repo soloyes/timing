@@ -30,4 +30,8 @@ public class ProgressGroup extends Group {
     public void switchVisible(){
         setVisible(!isVisible());
     }
+
+    public void dispose(){
+        SetElement.getInstance().dispose();
+    }
 }

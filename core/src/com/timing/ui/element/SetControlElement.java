@@ -9,7 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.timing.config.MSConstants;
 import com.timing.config.PaintConstants;
 import com.timing.config.Rules;
-import com.timing.ui.group.ConfigGroup;
+import com.timing.ui.group.ListGroup;
 import com.timing.ui.group.ProgressGroup;
 import com.timing.utils.Assets;
 import com.timing.utils.BoomBox;
@@ -45,7 +45,7 @@ public class SetControlElement extends Group {
         create.addListener(new ClickListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                ConfigGroup.getInstance().switchVisible();
+                ListGroup.getInstance().switchVisible();
                 ProgressGroup.getInstance().switchVisible();
                 return super.touchDown(event, x, y, pointer, button);
             }

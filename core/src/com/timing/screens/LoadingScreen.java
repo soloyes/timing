@@ -44,6 +44,7 @@ public class LoadingScreen extends BaseScreen {
 
     @Override
     public void dispose() {
+        super.dispose();
         texture.dispose();
         pixmap.dispose();
     }

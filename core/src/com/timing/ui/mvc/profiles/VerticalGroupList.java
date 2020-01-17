@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -57,7 +58,6 @@ public class VerticalGroupList extends VerticalGroup implements View<ProfileDAO>
         scrollPane = new ScrollPane(verticalGroup, skin);
         scrollPane.setFadeScrollBars(false);
         scrollPane.setScrollingDisabled(true, false);
-        //scrollPane.setVariableSizeKnobs(false);
         scrollPane.setVisible(false);
         Container<ScrollPane> container = new Container<ScrollPane>(scrollPane);
         container.setPosition(Rules.WORLD_WIDTH / 2, Rules.WORLD_HEIGHT / 2);
@@ -256,16 +256,7 @@ public class VerticalGroupList extends VerticalGroup implements View<ProfileDAO>
         Header() {
             this.table = new Table();
             table.row().padBottom(10).expandX();
-            Label.LabelStyle style32 = new Label.LabelStyle(
-                    Assets.getInstance().getAssetManager().get(PaintConstants.FONT32, BitmapFont.class),
-                    new Color(0.8f, 0.43f, 0.33f, 1f)
-            );
-
-            Label.LabelStyle style64 = new Label.LabelStyle(
-                    Assets.getInstance().getAssetManager().get(PaintConstants.FONT64, BitmapFont.class),
-                    new Color(0.8f, 0.43f, 0.33f, 1f)
-            );
-            Label plus = new Label("+", style64);
+            final TextButton plus = new TextButton(PaintConstants.UI_ADD_NEW_LINE, skin);
             plus.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
@@ -273,8 +264,8 @@ public class VerticalGroupList extends VerticalGroup implements View<ProfileDAO>
                     boomBox.playSound(MSConstants.UI_CLICK);
                 }
             });
-            table.add(plus);
-            table.add(new Label(PaintConstants.UI_ADD_NEW_LINE, style32)).center();
+            table.add();
+            table.add(plus).center();
             table.add();
             table.align(Align.bottomLeft);
             table.setFillParent(true);

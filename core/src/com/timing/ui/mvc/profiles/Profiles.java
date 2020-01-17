@@ -18,7 +18,6 @@ import java.util.List;
  * @author Shuttle on 16/01/20.
  */
 
-//todo: remove results also when remove profile (после того как дизайнер заапрувит таблицу результатов). А также удялять результаты построчно. Надо MVC.
 public class Profiles implements Model<ProfileDAO> {
     private static Profiles instance;
     private static boolean empty;
@@ -78,7 +77,6 @@ public class Profiles implements Model<ProfileDAO> {
         } else {
             AppPreferences.apply(AppPreferences.defaults);
         }
-        //ConfigGroup.getInstance().refresh();
     }
 
     private static ProfileDAO asDummy() {
@@ -86,7 +84,6 @@ public class Profiles implements Model<ProfileDAO> {
     }
 
     private void initDefaultProfiles() {
-        //todo: Add notice, that profiles will be not saved. Somewhere.
         if (getList().size() < PaintConstants.DUMMY_PROFILES) {
             for (int i = 0; i < PaintConstants.DUMMY_PROFILES; i++) {
                 getList().add(asDummy());
