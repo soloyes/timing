@@ -11,10 +11,23 @@ import com.timing.ui.element.SetElement;
  */
 
 public class ProgressGroup extends Group {
-    public ProgressGroup() {
+    private static ProgressGroup instance;
+
+    public static ProgressGroup getInstance() {
+        if (instance == null) {
+            instance = new ProgressGroup();
+        }
+        return instance;
+    }
+
+    private ProgressGroup() {
         this.addActor(ProgressControlElement.getInstance());
         this.addActor(ProgressElement.getInstance());
         this.addActor(SetElement.getInstance());
         this.addActor(SetControlElement.getInstance());
+    }
+
+    public void switchVisible(){
+        setVisible(!isVisible());
     }
 }

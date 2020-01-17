@@ -10,6 +10,10 @@ import com.timing.utils.Assets;
 
 import lombok.Getter;
 
+/**
+ * @author Shuttle on 16/01/20.
+ */
+
 public class ProgressControlElement extends Group {
     @Getter
     private static ProgressControlElement instance = new ProgressControlElement();

@@ -5,7 +5,7 @@ package com.timing.config;
  */
 
 public final class Rules {
-    public static final boolean DEBUG = false;
+    public static final boolean DEBUG = true;
 
     private Rules() {
     }
@@ -16,4 +16,13 @@ public final class Rules {
     public static final int WORLD_HEIGHT = 540;
     //Percentage 10
     public static final float LOADING_HEIGHT = 10.0f;
+
+    //1.0f
+    public static final float LINE_PRESSED_WAIT = 1.0f;
+    //3.0f
+    public static final float LINE_DELETE_WAIT = 3.0f;
+
+    //MUSIC
+    //2
+    public static final int MUSIC_EFFECT_PROBABILITY = 2;
 }

@@ -3,6 +3,8 @@ package com.timing.utils;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.FileHandleResolver;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -10,6 +12,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGeneratorLoader;
 import com.badlogic.gdx.graphics.g2d.freetype.FreetypeFontLoader;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.timing.config.MSConstants;
 import com.timing.config.PaintConstants;
 
 /**
@@ -34,7 +37,16 @@ public class Assets {
             case MAIN:
                 assetManager.load(PaintConstants.PACK, TextureAtlas.class);
                 assetManager.load(PaintConstants.SKIN_FILE, Skin.class);
+                assetManager.load(MSConstants.HUM_MUSIC_EFFECT_1, Music.class);
+                assetManager.load(MSConstants.HUM_MUSIC_EFFECT_2, Music.class);
+
+                assetManager.load(MSConstants.UI_CHANGED, Sound.class);
+                assetManager.load(MSConstants.UI_MENU, Sound.class);
+                assetManager.load(MSConstants.UI_CLICK, Sound.class);
+                assetManager.load(MSConstants.UI_INPUT, Sound.class);
+                assetManager.load(MSConstants.UI_PAUSE, Sound.class);
                 createStandardFont(32, "");
+                createStandardFont(64, "");
                 createStandardFont(128, "");
                 break;
         }

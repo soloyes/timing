@@ -2,6 +2,7 @@ package com.timing.screens;
 
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.timing.ui.group.ConfigGroup;
 import com.timing.ui.group.ProgressGroup;
 
 /**
@@ -11,7 +12,7 @@ import com.timing.ui.group.ProgressGroup;
 public class MainScreen extends BaseScreen {
     private Camera camera;
     private ProgressGroup progressGroup;
-//    private MainGroup mainGroup;
+    private ConfigGroup configGroup;
 
     public MainScreen(SpriteBatch batch, Camera camera) {
         super(batch);
@@ -21,29 +22,11 @@ public class MainScreen extends BaseScreen {
     @Override
     public void show() {
         super.show();
-        this.progressGroup = new ProgressGroup();
-//        this.mainGroup = new MainGroup();
-        stage.addActor(progressGroup);
-//        stage.addActor(loginGroup);
-//        checkStage();
-    }
+        this.progressGroup = ProgressGroup.getInstance();
+        this.configGroup = ConfigGroup.getInstance();
 
-    private void checkStage() {
-//        if (ApplicationPreferences.getAccountEnabled()) {
-//            if (!mainGroup.isVisible()) {
-//                mainGroup.setVisible(true);
-//            }
-//            if (loginGroup.isVisible()) {
-//                loginGroup.setVisible(false);
-//            }
-//        } else {
-//            if (mainGroup.isVisible()) {
-//                mainGroup.setVisible(false);
-//            }
-//            if (!loginGroup.isVisible()) {
-//                loginGroup.setVisible(true);
-//            }
-//        }
+        stage.addActor(progressGroup);
+        stage.addActor(configGroup);
     }
 
     @Override
@@ -71,7 +54,6 @@ public class MainScreen extends BaseScreen {
 //    }
 
     public void update(float dt) {
-        checkStage();
         stage.act();
     }
 
