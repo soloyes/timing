@@ -1,5 +1,6 @@
 package com.timing.ui.mvc.profiles;
 
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -33,6 +34,10 @@ public class ProfileDAO {
     @Setter
     private String id;
 
+    @Getter
+    @Setter
+    private List<Values> blocks;
+
     private ProfileDAO() {
     }
 
@@ -41,14 +46,33 @@ public class ProfileDAO {
         this.name = profile.getName();
         this.preferences = profile.getPreferences();
         this.active = profile.isActive();
+        this.blocks = profile.getBlocks();
     }
 
-    public ProfileDAO(Type type, String name, Map<String, Object> preferences, boolean active) {
+    public ProfileDAO(Type type, String name, Map<String, Object> preferences, boolean active, List<Values> blocks) {
         this.type = type;
         this.name = name;
         this.preferences = preferences;
         this.active = active;
+        this.blocks = blocks;
         this.id = UUID.randomUUID().toString();
+    }
+
+    public static class Values {
+        @Getter
+        @Setter
+        private int work;
+        @Getter
+        @Setter
+        private int rest;
+
+        public Values() {
+        }
+
+        public Values(int work, int rest) {
+            this.work = work;
+            this.rest = rest;
+        }
     }
 
     public enum Type {

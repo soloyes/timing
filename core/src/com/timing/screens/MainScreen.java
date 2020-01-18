@@ -2,6 +2,7 @@ package com.timing.screens;
 
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.timing.ui.group.ConfigGroup;
 import com.timing.ui.group.ListGroup;
 import com.timing.ui.group.ProgressGroup;
 
@@ -13,6 +14,7 @@ public class MainScreen extends BaseScreen {
     private Camera camera;
     private ProgressGroup progressGroup;
     private ListGroup listGroup;
+    private ConfigGroup configGroup;
 
     public MainScreen(SpriteBatch batch, Camera camera) {
         super(batch);
@@ -24,9 +26,11 @@ public class MainScreen extends BaseScreen {
         super.show();
         this.progressGroup = ProgressGroup.getInstance();
         this.listGroup = ListGroup.getInstance();
+        this.configGroup = ConfigGroup.getInstance();
 
         stage.addActor(progressGroup);
         stage.addActor(listGroup);
+        stage.addActor(configGroup);
     }
 
     @Override

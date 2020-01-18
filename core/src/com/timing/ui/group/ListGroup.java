@@ -39,16 +39,10 @@ public class ListGroup extends Group {
         this.boomBox = new BoomBox();
         this.back = new Button(skin);
         this.back.setBounds(Rules.WORLD_WIDTH / 2 - PaintConstants.BUTTON_SPACE, PaintConstants.PROGRESS_CONTROL_ELEMENT_HEIGHT, PaintConstants.BUTTON_WIDTH, PaintConstants.BUTTON_HEIGHT);
-        back.addListener(new ClickListener(){
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                boomBox.playSound(MSConstants.UI_MENU);
-                return super.touchDown(event, x, y, pointer, button);
-            }
-        });
         back.addListener(new ClickListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                boomBox.playSound(MSConstants.UI_MENU);
                 ListGroup.getInstance().switchVisible();
                 ProgressGroup.getInstance().switchVisible();
                 return super.touchDown(event, x, y, pointer, button);
@@ -65,12 +59,12 @@ public class ListGroup extends Group {
         this.addActor(back);
     }
 
-    public void switchVisible(){
+    public void switchVisible() {
         verticalGroupList.switchVisible();
         this.setVisible(!isVisible());
     }
 
-    public void dispose(){
+    public void dispose() {
         groupController.dispose();
     }
 }

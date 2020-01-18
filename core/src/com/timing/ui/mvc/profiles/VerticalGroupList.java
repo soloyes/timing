@@ -21,6 +21,9 @@ import com.badlogic.gdx.utils.Align;
 import com.timing.config.MSConstants;
 import com.timing.config.PaintConstants;
 import com.timing.config.Rules;
+import com.timing.ui.element.ListElement;
+import com.timing.ui.group.ConfigGroup;
+import com.timing.ui.group.ListGroup;
 import com.timing.ui.mvc.Controller;
 import com.timing.ui.mvc.View;
 import com.timing.utils.Assets;
@@ -238,7 +241,17 @@ public class VerticalGroupList extends VerticalGroup implements View<ProfileDAO>
                     }
                 });
 
-                table.add();
+                ListElement listElement = new ListElement(profile);
+                listElement.addListener(new ClickListener() {
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        super.clicked(event, x, y);
+                        ListGroup.getInstance().switchVisible();
+                        ConfigGroup.getInstance().switchVisible();
+                        ConfigGroup.getInstance().a(profile);
+                    }
+                });
+                table.add(listElement).left().bottom();
                 table.add(textField).center();
             }
 

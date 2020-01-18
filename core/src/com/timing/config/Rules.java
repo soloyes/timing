@@ -22,6 +22,10 @@ public final class Rules {
     //3.0f
     public static final float LINE_DELETE_WAIT = 3.0f;
 
+    //
+    public static final int DEFAULT_WORK_TIME = 30;
+    public static final int DEFAULT_REST_TIME = 30;
+
     //MUSIC
     //2
     public static final int MUSIC_EFFECT_PROBABILITY = 2;

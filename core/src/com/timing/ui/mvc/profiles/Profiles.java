@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.timing.config.AppPreferences;
 import com.timing.config.FileConstants;
 import com.timing.config.PaintConstants;
+import com.timing.config.Rules;
 import com.timing.ui.mvc.Model;
 
 import java.io.IOException;
@@ -32,7 +33,9 @@ public class Profiles implements Model<ProfileDAO> {
     }
 
     private static ProfileDAO asEmpty() {
-        return new ProfileDAO(ProfileDAO.Type.PROFILE, PaintConstants.UI_EMPTY_PROFILE, AppPreferences.defaults, false);
+        ArrayList<ProfileDAO.Values> blocks = new ArrayList<ProfileDAO.Values>();
+        blocks.add(new ProfileDAO.Values(Rules.DEFAULT_WORK_TIME, Rules.DEFAULT_REST_TIME));
+        return new ProfileDAO(ProfileDAO.Type.PROFILE, PaintConstants.UI_EMPTY_PROFILE, AppPreferences.defaults, false, blocks);
     }
 
     @Override
@@ -80,7 +83,7 @@ public class Profiles implements Model<ProfileDAO> {
     }
 
     private static ProfileDAO asDummy() {
-        return new ProfileDAO(ProfileDAO.Type.DUMMY, "", null, false);
+        return new ProfileDAO(ProfileDAO.Type.DUMMY, "", null, false, null);
     }
 
     private void initDefaultProfiles() {
@@ -163,7 +166,7 @@ public class Profiles implements Model<ProfileDAO> {
         write();
     }
 
-    public void flush(){
+    public void flush() {
         dispose();
     }
 
