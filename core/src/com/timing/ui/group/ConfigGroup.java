@@ -9,6 +9,7 @@ import com.timing.config.MSConstants;
 import com.timing.config.PaintConstants;
 import com.timing.config.Rules;
 import com.timing.ui.element.ListElement;
+import com.timing.ui.element.VerticalListElementList;
 import com.timing.ui.mvc.profiles.ProfileDAO;
 import com.timing.utils.Assets;
 import com.timing.utils.BoomBox;
@@ -25,6 +26,7 @@ public class ConfigGroup extends Group {
     @Setter
     @Getter
     private ListElement listElement;
+    private VerticalListElementList verticalListElementList;
 
     private Button back;
     private BoomBox boomBox;
@@ -52,13 +54,15 @@ public class ConfigGroup extends Group {
             }
         });
         this.addActor(back);
+        this.verticalListElementList = new VerticalListElementList();
+        this.addActor(verticalListElementList);
     }
 
     public void switchVisible() {
         this.setVisible(!isVisible());
     }
 
-    public void a(ProfileDAO profileDAO) {
-        addActor(new ListElement(profileDAO));
+    public void show(ProfileDAO profileDAO) {
+        verticalListElementList.show(profileDAO);
     }
 }

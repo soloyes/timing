@@ -19,10 +19,14 @@ public final class PaintConstants {
     public static final int SET_CONTROL_ELEMENT_HEIGHT = 90;
     public static final int SET_ELEMENT_HEIGHT = 210;
     public static final int SET_HEIGHT = 30;
+    public static final int MINUS_WIDTH = 30;
+    public static final int TEXT_FIELD_WIDTH = 120;
+
 
     public static final int DUMMY_PROFILES = 5;
     public static final String UI_EMPTY_PROFILE = "Empty";
     public static final String UI_ADD_NEW_LINE = "Add new timing";
+    public static final String UI_ADD_NEW_BLOCK = "Add new time block";
 
     public static final String FONT32 = "fonts/CollegeRegular32.ttf";
     public static final String FONT64 = "fonts/CollegeRegular64.ttf";

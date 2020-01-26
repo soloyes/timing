@@ -90,7 +90,7 @@ public class GroupController implements Controller<ProfileDAO> {
         model.dispose();
     }
 
-    public void flush(){
+    public void flush() {
         model.flush();
     }
 }

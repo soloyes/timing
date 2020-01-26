@@ -21,8 +21,8 @@ public class TimeBlock extends Group {
         this.width = width;
         this.height = height;
         this.splitAmount = splitAmount;
-        work = new SubBlock(width / 2, height, new Color(0.0f, 0.0f, 1.0f, 1.0f));
-        rest = new SubBlock(width / 2, height, new Color(1.0f, 0.5f, 0.0f, 1.0f));
+        this.work = new SubBlock(width / 2, height, new Color(0.0f, 0.0f, 1.0f, 1.0f));
+        this.rest = new SubBlock(width / 2, height, new Color(1.0f, 0.5f, 0.0f, 1.0f));
         this.pane = new SplitPane(work, rest, false, skin);
         this.pane.setBounds(x, y, width, height);
         pane.setSplitAmount(splitAmount);

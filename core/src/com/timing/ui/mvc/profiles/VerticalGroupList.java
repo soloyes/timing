@@ -64,11 +64,11 @@ public class VerticalGroupList extends VerticalGroup implements View<ProfileDAO>
         scrollPane.setVisible(false);
         Container<ScrollPane> container = new Container<ScrollPane>(scrollPane);
         container.setPosition(Rules.WORLD_WIDTH / 2, Rules.WORLD_HEIGHT / 2);
-        container.width(2 * Rules.WORLD_WIDTH / 3);
+        container.width(PaintConstants.MINUS_WIDTH + Rules.WORLD_WIDTH / 2 + PaintConstants.TEXT_FIELD_WIDTH + 60);
         container.height(Rules.WORLD_HEIGHT / 2);
         container.align(Align.top);
         this.setPosition(Rules.WORLD_WIDTH / 6, PaintConstants.PLAY_PROGRESS_BAR_HEIGHT);
-        this.setWidth(2 * Rules.WORLD_WIDTH / 3);
+        this.setWidth(PaintConstants.MINUS_WIDTH + Rules.WORLD_WIDTH / 2 + PaintConstants.TEXT_FIELD_WIDTH + 60);
         this.setHeight(Rules.WORLD_HEIGHT / 2);
 
         this.addActor(container);
@@ -82,7 +82,7 @@ public class VerticalGroupList extends VerticalGroup implements View<ProfileDAO>
     @Override
     public void init() {
         verticalGroup.clear();
-        verticalGroup.addActor(new Header());
+        verticalGroup.addActor(new Head());
 
         for (int i = 0; i < controller.getList().size(); i++) {
             ProfileDAO profile = controller.getList().get(i);
@@ -171,7 +171,7 @@ public class VerticalGroupList extends VerticalGroup implements View<ProfileDAO>
             this.timeAndFlag = new TimeAndFlag();
             this.profile = profile;
             this.table = new Table();
-            table.row().padBottom(10).expandX();
+            table.row();
             Label.LabelStyle style32 = new Label.LabelStyle(
                     Assets.getInstance().getAssetManager().get(PaintConstants.FONT32, BitmapFont.class),
                     new Color(0.8f, 0.43f, 0.33f, 1f)
@@ -202,7 +202,7 @@ public class VerticalGroupList extends VerticalGroup implements View<ProfileDAO>
                 table.add();
                 table.add();
             } else {
-                table.add(minus);
+                table.add(minus).width(PaintConstants.MINUS_WIDTH);
                 final TextField textField = new TextField(profile.getName(), skin);
                 //Label label = new Label(profile.getName(), style32);
 //                textField.addListener(new ClickListener() {
@@ -245,30 +245,32 @@ public class VerticalGroupList extends VerticalGroup implements View<ProfileDAO>
                 listElement.addListener(new ClickListener() {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
+                        if (!timeAndFlag.isConfirm()) {
+                            ListGroup.getInstance().switchVisible();
+                            ConfigGroup.getInstance().switchVisible();
+                            ConfigGroup.getInstance().show(profile);
+                        }
                         super.clicked(event, x, y);
-                        ListGroup.getInstance().switchVisible();
-                        ConfigGroup.getInstance().switchVisible();
-                        ConfigGroup.getInstance().a(profile);
                     }
                 });
-                table.add(listElement).left().bottom();
-                table.add(textField).center();
+                table.add(listElement).width(Rules.WORLD_WIDTH / 2).bottom();
+                table.add(textField).width(PaintConstants.TEXT_FIELD_WIDTH);
             }
 
-            table.align(Align.bottomLeft);
+            //table.align(Align.bottomLeft);
             table.setFillParent(true);
-            this.setWidth(2 * Rules.WORLD_WIDTH / 3);
-            this.setHeight(64);
+            this.setWidth(PaintConstants.MINUS_WIDTH + Rules.WORLD_WIDTH / 2 + PaintConstants.TEXT_FIELD_WIDTH);
+            this.setHeight(45);
             this.addActor(table);
         }
     }
 
-    private class Header extends Group {
+    private class Head extends Group {
         private Table table;
 
-        Header() {
+        Head() {
             this.table = new Table();
-            table.row().padBottom(10).expandX();
+            table.row().expandX();
             final TextButton plus = new TextButton(PaintConstants.UI_ADD_NEW_LINE, skin);
             plus.addListener(new ClickListener() {
                 @Override
@@ -282,8 +284,8 @@ public class VerticalGroupList extends VerticalGroup implements View<ProfileDAO>
             table.add();
             table.align(Align.bottomLeft);
             table.setFillParent(true);
-            this.setWidth(2 * Rules.WORLD_WIDTH / 3);
-            this.setHeight(64);
+            this.setWidth(PaintConstants.MINUS_WIDTH + Rules.WORLD_WIDTH / 2 + PaintConstants.TEXT_FIELD_WIDTH);
+            this.setHeight(45);
             this.addActor(table);
         }
     }

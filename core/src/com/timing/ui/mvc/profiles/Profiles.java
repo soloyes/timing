@@ -24,12 +24,10 @@ public class Profiles implements Model<ProfileDAO> {
     private static boolean empty;
     private List<ProfileDAO> profiles;
     private FileHandle file;
-    private ProfileDAO emptyProfile;
 
     public Profiles() {
         this.profiles = new ArrayList<ProfileDAO>();
         this.file = Gdx.files.local(FileConstants.PROFILES);
-        this.emptyProfile = asEmpty();
     }
 
     private static ProfileDAO asEmpty() {
@@ -83,7 +81,9 @@ public class Profiles implements Model<ProfileDAO> {
     }
 
     private static ProfileDAO asDummy() {
-        return new ProfileDAO(ProfileDAO.Type.DUMMY, "", null, false, null);
+        ArrayList<ProfileDAO.Values> blocks = new ArrayList<ProfileDAO.Values>();
+        blocks.add(new ProfileDAO.Values(Rules.DEFAULT_WORK_TIME, Rules.DEFAULT_REST_TIME));
+        return new ProfileDAO(ProfileDAO.Type.DUMMY, "", null, false, blocks);
     }
 
     private void initDefaultProfiles() {
@@ -133,7 +133,7 @@ public class Profiles implements Model<ProfileDAO> {
     @Override
     public void setEmpty(ProfileDAO profile) {
         preferencesToActiveProfile();
-        profile.copy(instance.emptyProfile);
+        profile.copy(asEmpty());
     }
 
     @Override
