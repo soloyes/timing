@@ -21,6 +21,8 @@ import com.timing.ui.group.ListGroup;
 import com.timing.ui.mvc.profiles.ProfileDAO;
 import com.timing.ui.mvc.profiles.Profiles;
 import com.timing.utils.Assets;
+import com.timing.utils.DigitFilter;
+import com.timing.utils.DigitInputListener;
 
 public class VerticalListElementList extends VerticalGroup {
     private final ScrollPane scrollPane;
@@ -128,9 +130,15 @@ public class VerticalListElementList extends VerticalGroup {
             this.work = new TextField("", skin);
             work.setMaxLength(3);
             work.setText(String.valueOf(listElement.getTotalWork()));
+            work.setTextFieldFilter(new DigitFilter());
+            work.addListener(new DigitInputListener(work));
+
             this.rest = new TextField("", skin);
             rest.setMaxLength(3);
             rest.setText(String.valueOf(listElement.getTotalRest()));
+            rest.setTextFieldFilter(new DigitFilter());
+            rest.addListener(new DigitInputListener(rest));
+
             innerTable.row();
             innerTable.add(work).width(PaintConstants.TEXT_FIELD_WIDTH / 2);
             innerTable.add(rest).width(PaintConstants.TEXT_FIELD_WIDTH / 2);
