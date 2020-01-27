@@ -1,5 +1,7 @@
 package com.timing.ui.mvc;
 
+import com.timing.ui.mvc.profiles.ProfileDAO;
+
 import java.util.List;
 
 /**
@@ -20,5 +22,7 @@ public interface Controller<T> {
 
     List<T> getList();
 
-    public void flush();
+    void flush();
+
+    ProfileDAO getActive();
 }

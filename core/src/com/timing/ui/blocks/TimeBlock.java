@@ -16,7 +16,7 @@ public class TimeBlock extends Group {
     private int height;
     private float splitAmount;
 
-    public TimeBlock(int x, int y, int width, int height, float splitAmount) {
+    public TimeBlock(int x, int y, int width, int height, final float splitAmount) {
         Skin skin = Assets.getInstance().getAssetManager().get(PaintConstants.SKIN_FILE);
         this.width = width;
         this.height = height;
@@ -26,6 +26,7 @@ public class TimeBlock extends Group {
         this.pane = new SplitPane(work, rest, false, skin);
         this.pane.setBounds(x, y, width, height);
         pane.setSplitAmount(splitAmount);
+        pane.clearListeners();
         this.addActor(pane);
     }
 

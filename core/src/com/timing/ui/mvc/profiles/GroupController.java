@@ -29,6 +29,7 @@ public class GroupController implements Controller<ProfileDAO> {
         return Profiles.isEmpty();
     }
 
+    @Override
     public ProfileDAO getActive() {
         return model.getActive();
     }

@@ -47,13 +47,12 @@ public class MainScreen extends BaseScreen {
     }
 
     public void update(float dt) {
-        stage.act();
+        stage.act(dt);
     }
 
     @Override
     public void dispose() {
         super.dispose();
         ListGroup.getInstance().dispose();
-        ProgressGroup.getInstance().dispose();
     }
 }

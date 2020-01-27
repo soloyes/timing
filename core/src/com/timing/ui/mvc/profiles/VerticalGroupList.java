@@ -24,6 +24,7 @@ import com.timing.config.Rules;
 import com.timing.ui.element.ListElement;
 import com.timing.ui.group.ConfigGroup;
 import com.timing.ui.group.ListGroup;
+import com.timing.ui.group.ProgressGroup;
 import com.timing.ui.mvc.Controller;
 import com.timing.ui.mvc.View;
 import com.timing.utils.Assets;
@@ -163,6 +164,7 @@ public class VerticalGroupList extends VerticalGroup implements View<ProfileDAO>
                 timeAndFlag.setDeleteWait(0.0f);
                 timeAndFlag.setConfirm(false);
                 controller.remove(Line.this.profile);
+                ProgressGroup.getInstance().update();
                 boomBox.playSound(MSConstants.UI_CHANGED);
             }
         }
@@ -241,16 +243,18 @@ public class VerticalGroupList extends VerticalGroup implements View<ProfileDAO>
                     }
                 });
 
-                ListElement listElement = new ListElement(profile);
+                final ListElement listElement = new ListElement(profile);
                 listElement.addListener(new ClickListener() {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
+                        super.clicked(event, x, y);
                         if (!timeAndFlag.isConfirm()) {
                             ListGroup.getInstance().switchVisible();
                             ConfigGroup.getInstance().switchVisible();
                             ConfigGroup.getInstance().show(profile);
+                            controller.select(profile);
+                            ProgressGroup.getInstance().update();
                         }
-                        super.clicked(event, x, y);
                     }
                 });
                 table.add(listElement).width(Rules.WORLD_WIDTH / 2).bottom();
@@ -275,7 +279,11 @@ public class VerticalGroupList extends VerticalGroup implements View<ProfileDAO>
             plus.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    controller.add();
+                    ProfileDAO profileDAO = controller.add();
+                    if (controller.getActive() == null) {
+                        controller.select(profileDAO);
+                        ProgressGroup.getInstance().update();
+                    }
                     boomBox.playSound(MSConstants.UI_CLICK);
                 }
             });

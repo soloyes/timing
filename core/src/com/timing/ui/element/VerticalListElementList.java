@@ -18,6 +18,7 @@ import com.timing.config.PaintConstants;
 import com.timing.config.Rules;
 import com.timing.ui.group.ConfigGroup;
 import com.timing.ui.group.ListGroup;
+import com.timing.ui.group.ProgressGroup;
 import com.timing.ui.mvc.profiles.ProfileDAO;
 import com.timing.ui.mvc.profiles.Profiles;
 import com.timing.utils.Assets;
@@ -56,7 +57,7 @@ public class VerticalListElementList extends VerticalGroup {
         this.profileDAO = profileDAO;
         verticalGroup.addActor(new Head());
         for (int i = 0; i < profileDAO.getBlocks().size(); i++) {
-            verticalGroup.addActor(new Line(new ListElement(profileDAO.getBlocks().get(i)), i));
+            verticalGroup.addActor(new Line(new ListElement(profileDAO.getBlocks().get(i)), profileDAO.getBlocks().get(i)));
         }
     }
 
@@ -71,9 +72,11 @@ public class VerticalListElementList extends VerticalGroup {
             plus.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    profileDAO.getBlocks().add(new ProfileDAO.Values(30, 30));
-                    verticalGroup.addActor(new Line(new ListElement(new ProfileDAO.Values(30, 30))));
+                    ProfileDAO.Values block = new ProfileDAO.Values(30, 30);
+                    profileDAO.getBlocks().add(block);
+                    verticalGroup.addActor(new Line(new ListElement(block), block));
                     ListGroup.getInstance().update();
+                    ProgressGroup.getInstance().update();
                 }
             });
             table.add();
@@ -92,15 +95,10 @@ public class VerticalListElementList extends VerticalGroup {
         private Table innerTable;
         private TextField work;
         private TextField rest;
-        private int blockIndex;
+        private ProfileDAO.Values block;
 
-        Line(final ListElement listElement) {
-            this(listElement, 0);
-            this.blockIndex = 0;
-        }
-
-        Line(final ListElement listElement, final int blockIndex) {
-            this.blockIndex = blockIndex;
+        Line(final ListElement listElement, final ProfileDAO.Values block) {
+            this.block = block;
             this.table = new Table();
             table.row();
             Label.LabelStyle style32 = new Label.LabelStyle(
@@ -111,15 +109,16 @@ public class VerticalListElementList extends VerticalGroup {
             minus.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
+                    super.clicked(event, x, y);
+                    profileDAO.getBlocks().remove(block);
                     verticalGroup.removeActor(Line.this);
-                    profileDAO.getBlocks().remove(blockIndex);
                     if (profileDAO.getBlocks().size() == 0) {
                         profiles.remove(profileDAO);
                         ListGroup.getInstance().switchVisible();
                         ConfigGroup.getInstance().switchVisible();
                     }
                     ListGroup.getInstance().update();
-                    super.clicked(event, x, y);
+                    ProgressGroup.getInstance().update();
                 }
             });
 

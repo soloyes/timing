@@ -27,11 +27,11 @@ public class ProgressGroup extends Group {
         this.addActor(SetControlElement.getInstance());
     }
 
-    public void switchVisible(){
+    public void switchVisible() {
         setVisible(!isVisible());
     }
 
-    public void dispose(){
-        SetElement.getInstance().dispose();
+    public void update() {
+        SetElement.getInstance().update();
     }
 }
