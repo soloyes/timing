@@ -2,6 +2,7 @@ package com.timing.ui.element;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Container;
@@ -12,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.timing.config.PaintConstants;
@@ -57,7 +59,7 @@ public class VerticalListElementList extends VerticalGroup {
         this.profileDAO = profileDAO;
         verticalGroup.addActor(new Head());
         for (int i = 0; i < profileDAO.getBlocks().size(); i++) {
-            verticalGroup.addActor(new Line(new ListElement(profileDAO.getBlocks().get(i)), profileDAO.getBlocks().get(i)));
+            verticalGroup.addActor(new Line(new SimpleListElement(profileDAO.getBlocks().get(i)), profileDAO.getBlocks().get(i)));
         }
     }
 
@@ -74,7 +76,7 @@ public class VerticalListElementList extends VerticalGroup {
                 public void clicked(InputEvent event, float x, float y) {
                     ProfileDAO.Values block = new ProfileDAO.Values(30, 30);
                     profileDAO.getBlocks().add(block);
-                    verticalGroup.addActor(new Line(new ListElement(block), block));
+                    verticalGroup.addActor(new Line(new SimpleListElement(block), block));
                     ListGroup.getInstance().update();
                     ProgressGroup.getInstance().update();
                 }
@@ -97,7 +99,7 @@ public class VerticalListElementList extends VerticalGroup {
         private TextField rest;
         private ProfileDAO.Values block;
 
-        Line(final ListElement listElement, final ProfileDAO.Values block) {
+        Line(final SimpleListElement simpleListElement, final ProfileDAO.Values block) {
             this.block = block;
             this.table = new Table();
             table.row();
@@ -123,20 +125,48 @@ public class VerticalListElementList extends VerticalGroup {
             });
 
             table.add(minus).width(PaintConstants.MINUS_WIDTH);
-            table.add(listElement).width(Rules.WORLD_WIDTH / 2).bottom();
+            table.add(simpleListElement).width(Rules.WORLD_WIDTH / 2).bottom();
 
             this.innerTable = new Table();
             this.work = new TextField("", skin);
             work.setMaxLength(3);
-            work.setText(String.valueOf(listElement.getTotalWork()));
+            work.setText(String.valueOf(simpleListElement.getTotalWork()));
             work.setTextFieldFilter(new DigitFilter());
             work.addListener(new DigitInputListener(work));
 
             this.rest = new TextField("", skin);
             rest.setMaxLength(3);
-            rest.setText(String.valueOf(listElement.getTotalRest()));
+            rest.setText(String.valueOf(simpleListElement.getTotalRest()));
             rest.setTextFieldFilter(new DigitFilter());
             rest.addListener(new DigitInputListener(rest));
+
+            work.addListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    int w, r;
+                    w = work.getText().isEmpty() || work.getText().equals("") ? 0 : Integer.valueOf(work.getText());
+                    r = rest.getText().isEmpty() || rest.getText().equals("") ? 0 : Integer.valueOf(rest.getText());
+                    simpleListElement.setSplitAmount(1.0f * w / (w + r));
+                    block.setWork(w);
+                    block.setRest(r);
+                    ListGroup.getInstance().update();
+                    ProgressGroup.getInstance().update();
+                }
+            });
+
+            rest.addListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    int w, r;
+                    w = work.getText().isEmpty() || work.getText().equals("") ? 0 : Integer.valueOf(work.getText());
+                    r = rest.getText().isEmpty() || rest.getText().equals("") ? 0 : Integer.valueOf(rest.getText());
+                    simpleListElement.setSplitAmount(1.0f * r / (w + r));
+                    block.setWork(w);
+                    block.setRest(r);
+                    ListGroup.getInstance().update();
+                    ProgressGroup.getInstance().update();
+                }
+            });
 
             innerTable.row();
             innerTable.add(work).width(PaintConstants.TEXT_FIELD_WIDTH / 2);

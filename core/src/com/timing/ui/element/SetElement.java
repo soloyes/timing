@@ -16,18 +16,18 @@ public class SetElement extends Group {
     @Getter
     private static SetElement instance = new SetElement();
     private Profiles profiles;
-    private ListElement listElement;
+    private ComplexListElement complexListElement;
 
     private SetElement() {
         this.profiles = new Profiles();
         ProfileDAO profileDAO = profiles.getActive();
         if (profileDAO == null) {
-            listElement = null;
+            complexListElement = null;
         } else {
-            listElement = new ListElement(profileDAO);
+            complexListElement = new ComplexListElement(profileDAO);
         }
-        if (listElement != null) {
-            this.addActor(listElement);
+        if (complexListElement != null) {
+            this.addActor(complexListElement);
         }
 
         this.setPosition(Rules.WORLD_WIDTH / 4, PaintConstants.SET_ELEMENT_HEIGHT);
@@ -37,8 +37,8 @@ public class SetElement extends Group {
         this.clear();
         ProfileDAO profileDAO = profiles.getActive();
         if (profileDAO != null){
-            listElement = new ListElement(profileDAO);
-            this.addActor(listElement);
+            complexListElement = new ComplexListElement(profileDAO);
+            this.addActor(complexListElement);
         }
     }
 }

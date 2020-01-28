@@ -8,7 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.timing.config.MSConstants;
 import com.timing.config.PaintConstants;
 import com.timing.config.Rules;
-import com.timing.ui.element.ListElement;
+import com.timing.ui.element.SimpleListElement;
 import com.timing.ui.element.VerticalListElementList;
 import com.timing.ui.mvc.profiles.ProfileDAO;
 import com.timing.utils.Assets;
@@ -25,7 +25,7 @@ public class ConfigGroup extends Group {
     private static ConfigGroup instance;
     @Setter
     @Getter
-    private ListElement listElement;
+    private SimpleListElement simpleListElement;
     private VerticalListElementList verticalListElementList;
 
     private Button back;

@@ -34,6 +34,10 @@ public class TimeBlock extends Group {
         return pane.getSplitAmount();
     }
 
+    public void setSplitAmount(float splitAmount) {
+        pane.setSplitAmount(splitAmount);
+    }
+
     public void dispose() {
         work.dispose();
         rest.dispose();
