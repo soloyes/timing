@@ -3,8 +3,10 @@ package com.timing.ui.group;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.timing.config.MSConstants;
 import com.timing.config.PaintConstants;
 import com.timing.config.Rules;
@@ -40,9 +42,10 @@ public class ConfigGroup extends Group {
 
     public ConfigGroup() {
         this.setVisible(false);
-        Skin skin = Assets.getInstance().getAssetManager().get(PaintConstants.SKIN_FILE);
         this.boomBox = new BoomBox();
-        this.back = new Button(skin);
+        this.back = new ImageButton(
+                new TextureRegionDrawable(Assets.getInstance().getAtlas().findRegion(PaintConstants.BUTTON_BACK))
+        );
         this.back.setBounds(Rules.WORLD_WIDTH / 2 - PaintConstants.BUTTON_SPACE, PaintConstants.PROGRESS_CONTROL_ELEMENT_HEIGHT, PaintConstants.BUTTON_WIDTH, PaintConstants.BUTTON_HEIGHT);
         back.addListener(new ClickListener() {
             @Override

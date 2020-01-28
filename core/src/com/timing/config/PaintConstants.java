@@ -22,11 +22,20 @@ public final class PaintConstants {
     public static final int MINUS_WIDTH = 30;
     public static final int TEXT_FIELD_WIDTH = 120;
 
-
     public static final int DUMMY_PROFILES = 5;
     public static final String UI_EMPTY_PROFILE = "Empty";
     public static final String UI_ADD_NEW_LINE = "Add new timing";
     public static final String UI_ADD_NEW_BLOCK = "Add new time block";
+
+    public static final String BUTTON_PLAY = "btnctrlplay";
+    public static final String BUTTON_PAUSE = "btnctrlpause";
+    public static final String BUTTON_STOP = "btnctrlstop";
+
+    public static final String BUTTON_CREATE = "btnsetcreate";
+    public static final String BUTTON_EDIT = "btnsetedit";
+    public static final String BUTTON_LOOP = "btnsetloop";
+
+    public static final String BUTTON_BACK = "btnothback";
 
     public static final String FONT32 = "fonts/CollegeRegular32.ttf";
     public static final String FONT64 = "fonts/CollegeRegular64.ttf";

@@ -4,8 +4,10 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.timing.config.MSConstants;
 import com.timing.config.PaintConstants;
 import com.timing.config.Rules;
@@ -34,9 +36,10 @@ public class ProgressControlElement extends Group {
     private BoomBox boomBox;
 
     private ProgressControlElement() {
-        Skin skin = Assets.getInstance().getAssetManager().get(PaintConstants.SKIN_FILE);
         this.boomBox = new BoomBox();
-        this.play = new Button(skin);
+        this.play = new ImageButton(
+                new TextureRegionDrawable(Assets.getInstance().getAtlas().findRegion(PaintConstants.BUTTON_PLAY))
+        );
         this.play.setBounds(Rules.WORLD_WIDTH / 2 - PaintConstants.BUTTON_SPACE - 3 * PaintConstants.BUTTON_WIDTH / 2, PaintConstants.PROGRESS_CONTROL_ELEMENT_HEIGHT, PaintConstants.BUTTON_WIDTH, PaintConstants.BUTTON_HEIGHT);
         play.addListener(new ClickListener(){
             @Override
@@ -47,7 +50,9 @@ public class ProgressControlElement extends Group {
             }
         });
 
-        this.pause = new Button(skin);
+        this.pause = new ImageButton(
+                new TextureRegionDrawable(Assets.getInstance().getAtlas().findRegion(PaintConstants.BUTTON_PAUSE))
+        );
         this.pause.setBounds(Rules.WORLD_WIDTH / 2 - PaintConstants.BUTTON_SPACE, PaintConstants.PROGRESS_CONTROL_ELEMENT_HEIGHT, PaintConstants.BUTTON_WIDTH, PaintConstants.BUTTON_HEIGHT);
         pause.addListener(new ClickListener(){
             @Override
@@ -58,7 +63,9 @@ public class ProgressControlElement extends Group {
             }
         });
 
-        this.stop = new Button(skin);
+        this.stop = new ImageButton(
+                new TextureRegionDrawable(Assets.getInstance().getAtlas().findRegion(PaintConstants.BUTTON_STOP))
+        );
         this.stop.setBounds(Rules.WORLD_WIDTH / 2 + PaintConstants.BUTTON_SPACE + PaintConstants.BUTTON_WIDTH / 2, PaintConstants.PROGRESS_CONTROL_ELEMENT_HEIGHT, PaintConstants.BUTTON_WIDTH, PaintConstants.BUTTON_HEIGHT);
         stop.addListener(new ClickListener(){
             @Override

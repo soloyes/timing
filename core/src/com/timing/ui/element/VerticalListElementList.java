@@ -206,7 +206,7 @@ public class VerticalListElementList extends VerticalGroup {
                     int w, r;
                     w = work.getText().isEmpty() || work.getText().equals("") ? 0 : Integer.valueOf(work.getText());
                     r = rest.getText().isEmpty() || rest.getText().equals("") ? 0 : Integer.valueOf(rest.getText());
-                    simpleListElement.setSplitAmount(1.0f * r / (w + r));
+                    simpleListElement.setSplitAmount(1 - 1.0f * r / (w + r));
                     boomBox.playSound(MSConstants.UI_INPUT);
                     rest.setColor(Color.RED);
                 }
