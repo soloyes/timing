@@ -1,10 +1,12 @@
 package com.timing.ui.element;
 
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
@@ -16,6 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
+import com.timing.config.MSConstants;
 import com.timing.config.PaintConstants;
 import com.timing.config.Rules;
 import com.timing.ui.group.ConfigGroup;
@@ -24,8 +27,12 @@ import com.timing.ui.group.ProgressGroup;
 import com.timing.ui.mvc.profiles.ProfileDAO;
 import com.timing.ui.mvc.profiles.Profiles;
 import com.timing.utils.Assets;
+import com.timing.utils.BoomBox;
 import com.timing.utils.DigitFilter;
 import com.timing.utils.DigitInputListener;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class VerticalListElementList extends VerticalGroup {
     private final ScrollPane scrollPane;
@@ -33,10 +40,14 @@ public class VerticalListElementList extends VerticalGroup {
     private Skin skin;
     private ProfileDAO profileDAO;
     private Profiles profiles;
+    private BoomBox boomBox;
+    private Set<Line> lines;
 
     public VerticalListElementList() {
         skin = Assets.getInstance().getAssetManager().get(PaintConstants.SKIN_FILE);
         this.verticalGroup = new VerticalGroup();
+        this.boomBox = new BoomBox();
+        this.lines = new HashSet<Line>();
         scrollPane = new ScrollPane(verticalGroup, skin);
         scrollPane.setFadeScrollBars(false);
         scrollPane.setScrollingDisabled(true, false);
@@ -56,13 +67,15 @@ public class VerticalListElementList extends VerticalGroup {
 
     public void show(ProfileDAO profileDAO) {
         verticalGroup.clear();
+        lines.clear();
         this.profileDAO = profileDAO;
         verticalGroup.addActor(new Head());
         for (int i = 0; i < profileDAO.getBlocks().size(); i++) {
-            verticalGroup.addActor(new Line(new SimpleListElement(profileDAO.getBlocks().get(i)), profileDAO.getBlocks().get(i)));
+            Line line = new Line(new SimpleListElement(profileDAO.getBlocks().get(i)), profileDAO.getBlocks().get(i));
+            verticalGroup.addActor(line);
+            lines.add(line);
         }
     }
-
 
     private class Head extends Group {
         private Table table;
@@ -76,9 +89,12 @@ public class VerticalListElementList extends VerticalGroup {
                 public void clicked(InputEvent event, float x, float y) {
                     ProfileDAO.Values block = new ProfileDAO.Values(30, 30);
                     profileDAO.getBlocks().add(block);
-                    verticalGroup.addActor(new Line(new SimpleListElement(block), block));
+                    Line line = new Line(new SimpleListElement(block), block);
+                    lines.add(line);
+                    verticalGroup.addActor(line);
                     ListGroup.getInstance().update();
                     ProgressGroup.getInstance().update();
+                    boomBox.playSound(MSConstants.UI_CLICK);
                 }
             });
             table.add();
@@ -114,6 +130,7 @@ public class VerticalListElementList extends VerticalGroup {
                     super.clicked(event, x, y);
                     profileDAO.getBlocks().remove(block);
                     verticalGroup.removeActor(Line.this);
+                    lines.remove(Line.this);
                     if (profileDAO.getBlocks().size() == 0) {
                         profiles.remove(profileDAO);
                         ListGroup.getInstance().switchVisible();
@@ -121,6 +138,7 @@ public class VerticalListElementList extends VerticalGroup {
                     }
                     ListGroup.getInstance().update();
                     ProgressGroup.getInstance().update();
+                    boomBox.playSound(MSConstants.UI_CHANGED);
                 }
             });
 
@@ -147,10 +165,29 @@ public class VerticalListElementList extends VerticalGroup {
                     w = work.getText().isEmpty() || work.getText().equals("") ? 0 : Integer.valueOf(work.getText());
                     r = rest.getText().isEmpty() || rest.getText().equals("") ? 0 : Integer.valueOf(rest.getText());
                     simpleListElement.setSplitAmount(1.0f * w / (w + r));
-                    block.setWork(w);
-                    block.setRest(r);
-                    ListGroup.getInstance().update();
-                    ProgressGroup.getInstance().update();
+                    boomBox.playSound(MSConstants.UI_INPUT);
+                    work.setColor(Color.RED);
+                }
+            });
+
+            work.addListener(new InputListener() {
+                @Override
+                public boolean keyDown(InputEvent event, int keycode) {
+                    if (keycode == Input.Keys.ENTER) {
+                        boomBox.playSound(MSConstants.UI_CLICK);
+                        for (Line l : lines) {
+                            l.save();
+                        }
+                        ListGroup.getInstance().update();
+                        ProgressGroup.getInstance().update();
+                    }
+                    return super.keyDown(event, keycode);
+                }
+
+                @Override
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                    boomBox.playSound(MSConstants.UI_CLICK);
+                    return super.touchDown(event, x, y, pointer, button);
                 }
             });
 
@@ -161,10 +198,29 @@ public class VerticalListElementList extends VerticalGroup {
                     w = work.getText().isEmpty() || work.getText().equals("") ? 0 : Integer.valueOf(work.getText());
                     r = rest.getText().isEmpty() || rest.getText().equals("") ? 0 : Integer.valueOf(rest.getText());
                     simpleListElement.setSplitAmount(1.0f * r / (w + r));
-                    block.setWork(w);
-                    block.setRest(r);
-                    ListGroup.getInstance().update();
-                    ProgressGroup.getInstance().update();
+                    boomBox.playSound(MSConstants.UI_INPUT);
+                    rest.setColor(Color.RED);
+                }
+            });
+
+            rest.addListener(new InputListener() {
+                @Override
+                public boolean keyDown(InputEvent event, int keycode) {
+                    if (keycode == Input.Keys.ENTER) {
+                        boomBox.playSound(MSConstants.UI_CLICK);
+                        for (Line l : lines) {
+                            l.save();
+                        }
+                        ListGroup.getInstance().update();
+                        ProgressGroup.getInstance().update();
+                    }
+                    return super.keyDown(event, keycode);
+                }
+
+                @Override
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                    boomBox.playSound(MSConstants.UI_CLICK);
+                    return super.touchDown(event, x, y, pointer, button);
                 }
             });
 
@@ -179,6 +235,20 @@ public class VerticalListElementList extends VerticalGroup {
             this.setWidth(2 * Rules.WORLD_WIDTH / 3);
             this.setHeight(45);
             this.addActor(table);
+        }
+
+        private void save() {
+            work.setColor(Color.WHITE);
+            rest.setColor(Color.WHITE);
+            setTextFields();
+        }
+
+        private void setTextFields() {
+            int w, r;
+            w = work.getText().isEmpty() || work.getText().equals("") ? 0 : Integer.valueOf(work.getText());
+            r = rest.getText().isEmpty() || rest.getText().equals("") ? 0 : Integer.valueOf(rest.getText());
+            block.setWork(w);
+            block.setRest(r);
         }
     }
 }

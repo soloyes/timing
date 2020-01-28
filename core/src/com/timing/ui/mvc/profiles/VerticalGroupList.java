@@ -206,14 +206,6 @@ public class VerticalGroupList extends VerticalGroup implements View<ProfileDAO>
             } else {
                 table.add(minus).width(PaintConstants.MINUS_WIDTH);
                 final TextField textField = new TextField(profile.getName(), skin);
-                //Label label = new Label(profile.getName(), style32);
-//                textField.addListener(new ClickListener() {
-//                    @Override
-//                    public void clicked(InputEvent event, float x, float y) {
-//                        controller.select(profile);
-//                        boomBox.playSound(MSConstants.UI_CHANGED);
-//                    }
-//                });
                 textField.addListener(new InputListener() {
                     @Override
                     public boolean keyDown(InputEvent event, int keycode) {
@@ -254,6 +246,7 @@ public class VerticalGroupList extends VerticalGroup implements View<ProfileDAO>
                             ConfigGroup.getInstance().show(profile);
                             controller.select(profile);
                             ProgressGroup.getInstance().update();
+                            boomBox.playSound(MSConstants.UI_CLICK);
                         }
                     }
                 });
