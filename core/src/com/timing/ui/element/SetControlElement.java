@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.timing.config.MSConstants;
 import com.timing.config.PaintConstants;
 import com.timing.config.Rules;
+import com.timing.ui.group.ConfigGroup;
 import com.timing.ui.group.ListGroup;
 import com.timing.ui.group.ProgressGroup;
 import com.timing.utils.Assets;
@@ -30,12 +31,15 @@ public class SetControlElement extends Group {
 
     private BoomBox boomBox;
 
+    @Getter
+    private boolean looped;
+
     private SetControlElement() {
         Skin skin = Assets.getInstance().getAssetManager().get(PaintConstants.SKIN_FILE);
         this.boomBox = new BoomBox();
         this.create = new Button(skin);
         this.create.setBounds(Rules.WORLD_WIDTH / 2 - PaintConstants.BUTTON_SPACE - 3 * PaintConstants.BUTTON_WIDTH / 2, PaintConstants.SET_CONTROL_ELEMENT_HEIGHT, PaintConstants.BUTTON_WIDTH, PaintConstants.BUTTON_HEIGHT);
-        create.addListener(new ClickListener(){
+        create.addListener(new ClickListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 boomBox.playSound(MSConstants.UI_MENU);
@@ -52,9 +56,10 @@ public class SetControlElement extends Group {
         });
         this.modify = new Button(skin);
         this.modify.setBounds(Rules.WORLD_WIDTH / 2 - PaintConstants.BUTTON_SPACE, PaintConstants.SET_CONTROL_ELEMENT_HEIGHT, PaintConstants.BUTTON_WIDTH, PaintConstants.BUTTON_HEIGHT);
-        modify.addListener(new ClickListener(){
+        modify.addListener(new ClickListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                ConfigGroup.getInstance().showActive();
                 boomBox.playSound(MSConstants.UI_MENU);
                 return super.touchDown(event, x, y, pointer, button);
             }
@@ -62,9 +67,10 @@ public class SetControlElement extends Group {
 
         this.loop = new Button(skin);
         this.loop.setBounds(Rules.WORLD_WIDTH / 2 + PaintConstants.BUTTON_SPACE + PaintConstants.BUTTON_WIDTH / 2, PaintConstants.SET_CONTROL_ELEMENT_HEIGHT, PaintConstants.BUTTON_WIDTH, PaintConstants.BUTTON_HEIGHT);
-        loop.addListener(new ClickListener(){
+        loop.addListener(new ClickListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                looped = !looped;
                 boomBox.playSound(MSConstants.UI_MENU);
                 return super.touchDown(event, x, y, pointer, button);
             }

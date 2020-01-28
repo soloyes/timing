@@ -65,4 +65,8 @@ public class ConfigGroup extends Group {
     public void show(ProfileDAO profileDAO) {
         verticalListElementList.show(profileDAO);
     }
+
+    public void showActive() {
+        verticalListElementList.showActive();
+    }
 }

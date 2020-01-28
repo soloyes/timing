@@ -13,6 +13,7 @@ import com.timing.utils.Assets;
 import com.timing.utils.BoomBox;
 
 import lombok.Getter;
+import lombok.Setter;
 
 /**
  * @author Shuttle on 16/01/20.
@@ -21,6 +22,10 @@ import lombok.Getter;
 public class ProgressControlElement extends Group {
     @Getter
     private static ProgressControlElement instance = new ProgressControlElement();
+
+    @Getter
+    @Setter
+    private boolean on = false;
 
     private Button play;
     private Button pause;
@@ -36,6 +41,7 @@ public class ProgressControlElement extends Group {
         play.addListener(new ClickListener(){
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                on = true;
                 boomBox.playSound(MSConstants.UI_MENU);
                 return super.touchDown(event, x, y, pointer, button);
             }
@@ -46,6 +52,7 @@ public class ProgressControlElement extends Group {
         pause.addListener(new ClickListener(){
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                on = false;
                 boomBox.playSound(MSConstants.UI_MENU);
                 return super.touchDown(event, x, y, pointer, button);
             }
@@ -56,6 +63,7 @@ public class ProgressControlElement extends Group {
         stop.addListener(new ClickListener(){
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                ProgressElement.getInstance().setDefault();
                 boomBox.playSound(MSConstants.UI_MENU);
                 return super.touchDown(event, x, y, pointer, button);
             }
@@ -80,4 +88,3 @@ public class ProgressControlElement extends Group {
         batch.setColor(1.0f, 1.0f, 1.0f, 1.0f);
     }
 }
-

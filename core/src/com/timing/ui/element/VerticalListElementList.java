@@ -77,6 +77,15 @@ public class VerticalListElementList extends VerticalGroup {
         }
     }
 
+    public void showActive(){
+        ProfileDAO profileDAO = profiles.getActive();
+        if (profileDAO != null){
+            show(profileDAO);
+            ConfigGroup.getInstance().switchVisible();
+            ProgressGroup.getInstance().switchVisible();
+        }
+    }
+
     private class Head extends Group {
         private Table table;
 

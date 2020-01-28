@@ -34,11 +34,12 @@ public class ProgressElement extends Group {
 
     @Override
     public void act(float delta) {
-        super.act(delta);
-        progress += delta * 60;
-        progressBar.setValue(progress);
-        if (progressBar.getPercent() >= 1.0f) {
-            progress = 0.0f;
+        if (ProgressControlElement.getInstance().isOn()) {
+            progress += delta * 60;
+            progressBar.setValue(progress);
+            if (progressBar.getPercent() >= 1.0f) {
+                progress = 0.0f;
+            }
         }
     }
 
@@ -46,5 +47,11 @@ public class ProgressElement extends Group {
     public void draw(Batch batch, float parentAlpha) {
         progressBar.draw(batch, parentAlpha);
         batch.setColor(1.0f, 1.0f, 1.0f, 1.0f);
+    }
+
+    public void setDefault(){
+        progress = 0.0f;
+        progressBar.setValue(progress);
+        ProgressControlElement.getInstance().setOn(false);
     }
 }
