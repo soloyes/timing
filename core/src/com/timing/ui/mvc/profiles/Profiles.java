@@ -19,6 +19,7 @@ import java.util.List;
  * @author Shuttle on 16/01/20.
  */
 
+//todo: Сделать нормальный синглтон? А то везде зову этот класс, и каждый раз создаётся контекст. Может быть я был не прав в таком подходе, надо попробовать переделать.
 public class Profiles implements Model<ProfileDAO> {
     private static Profiles instance;
     private static boolean empty;

@@ -50,6 +50,7 @@ public class SetControlElement extends Group {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 ListGroup.getInstance().switchVisible();
                 ProgressGroup.getInstance().switchVisible();
+                ProgressElement.getInstance().update();
                 return super.touchDown(event, x, y, pointer, button);
             }
         });
@@ -61,6 +62,7 @@ public class SetControlElement extends Group {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 ConfigGroup.getInstance().showActive();
+                ProgressElement.getInstance().update();
                 boomBox.playSound(MSConstants.UI_MENU);
                 return super.touchDown(event, x, y, pointer, button);
             }

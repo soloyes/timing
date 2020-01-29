@@ -26,6 +26,9 @@ public final class Rules {
     public static final int DEFAULT_WORK_TIME = 30;
     public static final int DEFAULT_REST_TIME = 30;
 
+    //
+    public static final int GRANULARITY = 100;
+
     //MUSIC
     //2
     public static final int MUSIC_EFFECT_PROBABILITY = 2;

@@ -18,8 +18,8 @@ public class AppPreferences {
     private static final String PREF_EFFECTS_VOLUME = "effects";
     private static final String PREF_MUSIC_ENABLED = "music.enabled";
     private static final String PREF_MUSIC_VOLUME = "music";
-
     private static final String PREF_VIBRATION_ENABLED = "vibration.enabled";
+    private static final String PREF_TIME_FORMAT = "time.format";
 
     private static Preferences preferences;
 
@@ -30,6 +30,7 @@ public class AppPreferences {
         put(PREF_MUSIC_ENABLED, true);
         put(PREF_MUSIC_VOLUME, 0.5f);
         put(PREF_VIBRATION_ENABLED, true);
+        put(PREF_TIME_FORMAT, 1.0f);
     }};
 
     public static void apply(Map<String, Object> preferences) {
@@ -50,17 +51,18 @@ public class AppPreferences {
         return preferences;
     }
 
-    public static float getOverallMusicVolume(){
+    public static float getOverallMusicVolume() {
         return getMusicVolume() * getSoundVolume();
     }
 
-    public static float getOverallEffectsVolume(){
+    public static float getOverallEffectsVolume() {
         return getEffectsVolume() * getSoundVolume();
     }
 
     public static float getSoundVolume() {
         return getInstance().getFloat(PREF_SOUND_VOLUME);
     }
+
 
     public static void setSoundVolume(float volume) {
         getInstance().putFloat(PREF_SOUND_VOLUME, volume);
@@ -109,6 +111,15 @@ public class AppPreferences {
 
     public static void setVibrationEnabled(boolean enabled) {
         getInstance().putBoolean(PREF_VIBRATION_ENABLED, enabled);
+        getInstance().flush();
+    }
+
+    public static float getTimeFormat() {
+        return getInstance().getFloat(PREF_TIME_FORMAT);
+    }
+
+    public static void setTimeFormat(float format) {
+        getInstance().putFloat(PREF_TIME_FORMAT, format);
         getInstance().flush();
     }
 }
