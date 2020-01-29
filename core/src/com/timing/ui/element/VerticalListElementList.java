@@ -51,7 +51,7 @@ public class VerticalListElementList extends VerticalGroup {
         scrollPane = new ScrollPane(verticalGroup, skin);
         scrollPane.setFadeScrollBars(false);
         scrollPane.setScrollingDisabled(true, false);
-
+        scrollPane.getStyle().background = null;
         Container<ScrollPane> container = new Container<ScrollPane>(scrollPane);
         container.setPosition(Rules.WORLD_WIDTH / 2, Rules.WORLD_HEIGHT / 2);
         container.width(PaintConstants.MINUS_WIDTH + Rules.WORLD_WIDTH / 2 + PaintConstants.TEXT_FIELD_WIDTH + 60);

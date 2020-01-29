@@ -63,6 +63,8 @@ public class VerticalGroupList extends VerticalGroup implements View<ProfileDAO>
         scrollPane.setFadeScrollBars(false);
         scrollPane.setScrollingDisabled(true, false);
         scrollPane.setVisible(false);
+        scrollPane.getStyle().background = null;
+
         Container<ScrollPane> container = new Container<ScrollPane>(scrollPane);
         container.setPosition(Rules.WORLD_WIDTH / 2, Rules.WORLD_HEIGHT / 2);
         container.width(PaintConstants.MINUS_WIDTH + Rules.WORLD_WIDTH / 2 + PaintConstants.TEXT_FIELD_WIDTH + 60);

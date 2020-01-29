@@ -1,15 +1,16 @@
 package com.timing.ui.element;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.timing.config.MSConstants;
 import com.timing.config.PaintConstants;
 import com.timing.config.Rules;
+import com.timing.ui.blocks.UIButton;
 import com.timing.ui.group.ConfigGroup;
 import com.timing.ui.group.ListGroup;
 import com.timing.ui.group.ProgressGroup;
@@ -34,7 +35,7 @@ public class SetControlElement extends Group {
 
     private SetControlElement() {
         this.boomBox = new BoomBox();
-        this.create = new ImageButton(
+        this.create = new UIButton(
                 new TextureRegionDrawable(Assets.getInstance().getAtlas().findRegion(PaintConstants.BUTTON_CREATE))
         );
         this.create.setBounds(Rules.WORLD_WIDTH / 2 - PaintConstants.BUTTON_SPACE - 3 * PaintConstants.BUTTON_WIDTH / 2, PaintConstants.SET_CONTROL_ELEMENT_HEIGHT, PaintConstants.BUTTON_WIDTH, PaintConstants.BUTTON_HEIGHT);
@@ -54,7 +55,7 @@ public class SetControlElement extends Group {
                 return super.touchDown(event, x, y, pointer, button);
             }
         });
-        this.edit = new ImageButton(
+        this.edit = new UIButton(
                 new TextureRegionDrawable(Assets.getInstance().getAtlas().findRegion(PaintConstants.BUTTON_EDIT))
         );
         this.edit.setBounds(Rules.WORLD_WIDTH / 2 - PaintConstants.BUTTON_SPACE, PaintConstants.SET_CONTROL_ELEMENT_HEIGHT, PaintConstants.BUTTON_WIDTH, PaintConstants.BUTTON_HEIGHT);
@@ -68,7 +69,7 @@ public class SetControlElement extends Group {
             }
         });
 
-        this.loop = new ImageButton(
+        this.loop = new UIButton(
                 new TextureRegionDrawable(Assets.getInstance().getAtlas().findRegion(PaintConstants.BUTTON_LOOP))
         );
         this.loop.setBounds(Rules.WORLD_WIDTH / 2 + PaintConstants.BUTTON_SPACE + PaintConstants.BUTTON_WIDTH / 2, PaintConstants.SET_CONTROL_ELEMENT_HEIGHT, PaintConstants.BUTTON_WIDTH, PaintConstants.BUTTON_HEIGHT);
@@ -76,6 +77,11 @@ public class SetControlElement extends Group {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 looped = !looped;
+                if (looped){
+                    loop.setColor(Color.RED);
+                } else {
+                    loop.setColor(Color.WHITE);
+                }
                 boomBox.playSound(MSConstants.UI_MENU);
                 return super.touchDown(event, x, y, pointer, button);
             }

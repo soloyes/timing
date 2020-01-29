@@ -5,7 +5,7 @@ package com.timing.config;
  */
 
 public final class Rules {
-    public static final boolean DEBUG = true;
+    public static final boolean DEBUG = false;
 
     private Rules() {
     }

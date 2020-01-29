@@ -3,13 +3,12 @@ package com.timing.ui.group;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.timing.config.MSConstants;
 import com.timing.config.PaintConstants;
 import com.timing.config.Rules;
+import com.timing.ui.blocks.UIButton;
 import com.timing.ui.mvc.profiles.GroupController;
 import com.timing.ui.mvc.profiles.Profiles;
 import com.timing.ui.mvc.profiles.VerticalGroupList;
@@ -38,7 +37,7 @@ public class ListGroup extends Group {
     private ListGroup() {
         this.setVisible(false);
         this.boomBox = new BoomBox();
-        this.back = new ImageButton(
+        this.back = new UIButton(
                 new TextureRegionDrawable(Assets.getInstance().getAtlas().findRegion(PaintConstants.BUTTON_BACK))
         );
         this.back.setBounds(Rules.WORLD_WIDTH / 2 - PaintConstants.BUTTON_SPACE, PaintConstants.PROGRESS_CONTROL_ELEMENT_HEIGHT, PaintConstants.BUTTON_WIDTH, PaintConstants.BUTTON_HEIGHT);
