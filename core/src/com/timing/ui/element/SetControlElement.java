@@ -41,17 +41,17 @@ public class SetControlElement extends Group {
         this.create.setBounds(Rules.WORLD_WIDTH / 2 - PaintConstants.BUTTON_SPACE - 3 * PaintConstants.BUTTON_WIDTH / 2, PaintConstants.SET_CONTROL_ELEMENT_HEIGHT, PaintConstants.BUTTON_WIDTH, PaintConstants.BUTTON_HEIGHT);
         create.addListener(new ClickListener() {
             @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                boomBox.playSound(MSConstants.UI_MENU);
-                return super.touchDown(event, x, y, pointer, button);
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                ListGroup.getInstance().switchVisible();
+                ProgressGroup.getInstance().switchVisible();
+                ProgressElement.getInstance().update();
+                super.touchUp(event, x, y, pointer, button);
             }
         });
         create.addListener(new ClickListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                ListGroup.getInstance().switchVisible();
-                ProgressGroup.getInstance().switchVisible();
-                ProgressElement.getInstance().update();
+                boomBox.playSound(MSConstants.UI_MENU);
                 return super.touchDown(event, x, y, pointer, button);
             }
         });
@@ -61,9 +61,14 @@ public class SetControlElement extends Group {
         this.edit.setBounds(Rules.WORLD_WIDTH / 2 - PaintConstants.BUTTON_SPACE, PaintConstants.SET_CONTROL_ELEMENT_HEIGHT, PaintConstants.BUTTON_WIDTH, PaintConstants.BUTTON_HEIGHT);
         edit.addListener(new ClickListener() {
             @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 ConfigGroup.getInstance().showActive();
                 ProgressElement.getInstance().update();
+                super.touchUp(event, x, y, pointer, button);
+            }
+
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 boomBox.playSound(MSConstants.UI_MENU);
                 return super.touchDown(event, x, y, pointer, button);
             }
@@ -75,13 +80,18 @@ public class SetControlElement extends Group {
         this.loop.setBounds(Rules.WORLD_WIDTH / 2 + PaintConstants.BUTTON_SPACE + PaintConstants.BUTTON_WIDTH / 2, PaintConstants.SET_CONTROL_ELEMENT_HEIGHT, PaintConstants.BUTTON_WIDTH, PaintConstants.BUTTON_HEIGHT);
         loop.addListener(new ClickListener() {
             @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 looped = !looped;
-                if (looped){
+                if (looped) {
                     loop.setColor(Color.RED);
                 } else {
                     loop.setColor(Color.WHITE);
                 }
+                super.touchUp(event, x, y, pointer, button);
+            }
+
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 boomBox.playSound(MSConstants.UI_MENU);
                 return super.touchDown(event, x, y, pointer, button);
             }

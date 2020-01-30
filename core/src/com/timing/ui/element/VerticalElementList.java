@@ -34,7 +34,7 @@ import com.timing.utils.DigitInputListener;
 import java.util.HashSet;
 import java.util.Set;
 
-public class VerticalListElementList extends VerticalGroup {
+public class VerticalElementList extends VerticalGroup {
     private final ScrollPane scrollPane;
     private VerticalGroup verticalGroup;
     private Skin skin;
@@ -43,7 +43,7 @@ public class VerticalListElementList extends VerticalGroup {
     private BoomBox boomBox;
     private Set<Line> lines;
 
-    public VerticalListElementList() {
+    public VerticalElementList() {
         skin = Assets.getInstance().getAssetManager().get(PaintConstants.SKIN_FILE);
         this.verticalGroup = new VerticalGroup();
         this.boomBox = new BoomBox();
@@ -52,13 +52,15 @@ public class VerticalListElementList extends VerticalGroup {
         scrollPane.setFadeScrollBars(false);
         scrollPane.setScrollingDisabled(true, false);
         scrollPane.getStyle().background = null;
+        scrollPane.setForceScroll(false, true);
+
         Container<ScrollPane> container = new Container<ScrollPane>(scrollPane);
         container.setPosition(Rules.WORLD_WIDTH / 2, Rules.WORLD_HEIGHT / 2);
-        container.width(PaintConstants.MINUS_WIDTH + Rules.WORLD_WIDTH / 2 + PaintConstants.TEXT_FIELD_WIDTH + 60);
+        container.width(PaintConstants.MINUS_WIDTH + Rules.WORLD_WIDTH / 2 + PaintConstants.TEXT_FIELD_WIDTH + PaintConstants.LIST_EPSILON_WIDTH);
         container.height(Rules.WORLD_HEIGHT / 2);
         container.align(Align.top);
         this.setPosition(Rules.WORLD_WIDTH / 6, PaintConstants.PLAY_PROGRESS_BAR_HEIGHT);
-        this.setWidth(PaintConstants.MINUS_WIDTH + Rules.WORLD_WIDTH / 2 + PaintConstants.TEXT_FIELD_WIDTH + 60);
+        this.setWidth(PaintConstants.MINUS_WIDTH + Rules.WORLD_WIDTH / 2 + PaintConstants.TEXT_FIELD_WIDTH + PaintConstants.LIST_EPSILON_WIDTH);
         this.setHeight(Rules.WORLD_HEIGHT / 2);
 
         this.profiles = new Profiles();
@@ -77,9 +79,9 @@ public class VerticalListElementList extends VerticalGroup {
         }
     }
 
-    public void showActive(){
+    public void showActive() {
         ProfileDAO profileDAO = profiles.getActive();
-        if (profileDAO != null){
+        if (profileDAO != null) {
             show(profileDAO);
             ConfigGroup.getInstance().switchVisible();
             ProgressGroup.getInstance().switchVisible();
@@ -152,7 +154,7 @@ public class VerticalListElementList extends VerticalGroup {
             });
 
             table.add(minus).width(PaintConstants.MINUS_WIDTH);
-            table.add(simpleListElement).width(Rules.WORLD_WIDTH / 2).bottom();
+            table.add(simpleListElement).width((Rules.WORLD_WIDTH / 2) - PaintConstants.LIST_ELEMENT_PAD).padRight(PaintConstants.LIST_ELEMENT_PAD);
 
             this.innerTable = new Table();
             this.work = new TextField("", skin);
@@ -241,7 +243,7 @@ public class VerticalListElementList extends VerticalGroup {
             table.align(Align.bottomLeft);
             table.setFillParent(true);
 
-            this.setWidth(2 * Rules.WORLD_WIDTH / 3);
+            this.setWidth(PaintConstants.MINUS_WIDTH + Rules.WORLD_WIDTH / 2 + PaintConstants.TEXT_FIELD_WIDTH);
             this.setHeight(45);
             this.addActor(table);
         }

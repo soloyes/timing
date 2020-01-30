@@ -46,10 +46,14 @@ public class ProgressElement extends Group {
     public void act(float delta) {
         if (ProgressControlElement.getInstance().isOn() && max != null) {
             float max = this.max * AppPreferences.getTimeFormat();
-            progressBar.setRange(0.0f, max);
-            progressBar.setStepSize(max / (AppPreferences.getTimeFormat() * Rules.GRANULARITY));
-            progress += delta;
-            progressBar.setValue(progress);
+            if (max == 0.0f){
+                checkLoop();
+            } else {
+                progressBar.setRange(0.0f, max);
+                progressBar.setStepSize(max / (AppPreferences.getTimeFormat() * Rules.GRANULARITY));
+                progress += delta;
+                progressBar.setValue(progress);
+            }
             if (progressBar.getPercent() >= 1.0f) {
                 progress = 0.0f;
                 checkLoop();

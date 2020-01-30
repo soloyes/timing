@@ -64,14 +64,15 @@ public class VerticalGroupList extends VerticalGroup implements View<ProfileDAO>
         scrollPane.setScrollingDisabled(true, false);
         scrollPane.setVisible(false);
         scrollPane.getStyle().background = null;
+        scrollPane.setForceScroll(false, true);
 
         Container<ScrollPane> container = new Container<ScrollPane>(scrollPane);
         container.setPosition(Rules.WORLD_WIDTH / 2, Rules.WORLD_HEIGHT / 2);
-        container.width(PaintConstants.MINUS_WIDTH + Rules.WORLD_WIDTH / 2 + PaintConstants.TEXT_FIELD_WIDTH + 60);
+        container.width(PaintConstants.MINUS_WIDTH + Rules.WORLD_WIDTH / 2 + PaintConstants.TEXT_FIELD_WIDTH + PaintConstants.LIST_EPSILON_WIDTH);
         container.height(Rules.WORLD_HEIGHT / 2);
         container.align(Align.top);
         this.setPosition(Rules.WORLD_WIDTH / 6, PaintConstants.PLAY_PROGRESS_BAR_HEIGHT);
-        this.setWidth(PaintConstants.MINUS_WIDTH + Rules.WORLD_WIDTH / 2 + PaintConstants.TEXT_FIELD_WIDTH + 60);
+        this.setWidth(PaintConstants.MINUS_WIDTH + Rules.WORLD_WIDTH / 2 + PaintConstants.TEXT_FIELD_WIDTH + PaintConstants.LIST_EPSILON_WIDTH);
         this.setHeight(Rules.WORLD_HEIGHT / 2);
 
         this.addActor(container);
@@ -252,7 +253,7 @@ public class VerticalGroupList extends VerticalGroup implements View<ProfileDAO>
                         }
                     }
                 });
-                table.add(complexListElement).width(Rules.WORLD_WIDTH / 2).bottom();
+                table.add(complexListElement).width((Rules.WORLD_WIDTH / 2) - PaintConstants.LIST_ELEMENT_PAD).padRight(PaintConstants.LIST_ELEMENT_PAD);
                 table.add(textField).width(PaintConstants.TEXT_FIELD_WIDTH);
             }
 

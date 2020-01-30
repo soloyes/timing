@@ -10,7 +10,7 @@ import com.timing.config.PaintConstants;
 import com.timing.config.Rules;
 import com.timing.ui.blocks.UIButton;
 import com.timing.ui.element.SimpleListElement;
-import com.timing.ui.element.VerticalListElementList;
+import com.timing.ui.element.VerticalElementList;
 import com.timing.ui.mvc.profiles.ProfileDAO;
 import com.timing.utils.Assets;
 import com.timing.utils.BoomBox;
@@ -27,7 +27,7 @@ public class ConfigGroup extends Group {
     @Setter
     @Getter
     private SimpleListElement simpleListElement;
-    private VerticalListElementList verticalListElementList;
+    private VerticalElementList verticalElementList;
 
     private Button back;
     private BoomBox boomBox;
@@ -48,16 +48,21 @@ public class ConfigGroup extends Group {
         this.back.setBounds(Rules.WORLD_WIDTH / 2 - PaintConstants.BUTTON_SPACE, PaintConstants.PROGRESS_CONTROL_ELEMENT_HEIGHT, PaintConstants.BUTTON_WIDTH, PaintConstants.BUTTON_HEIGHT);
         back.addListener(new ClickListener() {
             @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                boomBox.playSound(MSConstants.UI_MENU);
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                super.touchUp(event, x, y, pointer, button);
                 ListGroup.getInstance().switchVisible();
                 ConfigGroup.getInstance().switchVisible();
+            }
+
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                boomBox.playSound(MSConstants.UI_MENU);
                 return super.touchDown(event, x, y, pointer, button);
             }
         });
         this.addActor(back);
-        this.verticalListElementList = new VerticalListElementList();
-        this.addActor(verticalListElementList);
+        this.verticalElementList = new VerticalElementList();
+        this.addActor(verticalElementList);
     }
 
     public void switchVisible() {
@@ -65,10 +70,10 @@ public class ConfigGroup extends Group {
     }
 
     public void show(ProfileDAO profileDAO) {
-        verticalListElementList.show(profileDAO);
+        verticalElementList.show(profileDAO);
     }
 
     public void showActive() {
-        verticalListElementList.showActive();
+        verticalElementList.showActive();
     }
 }

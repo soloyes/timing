@@ -43,9 +43,14 @@ public class ProgressControlElement extends Group {
         play.addListener(new ClickListener(){
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                on = true;
                 boomBox.playSound(MSConstants.UI_MENU);
                 return super.touchDown(event, x, y, pointer, button);
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                on = true;
+                super.touchUp(event, x, y, pointer, button);
             }
         });
 
@@ -56,9 +61,14 @@ public class ProgressControlElement extends Group {
         pause.addListener(new ClickListener(){
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                on = false;
                 boomBox.playSound(MSConstants.UI_MENU);
                 return super.touchDown(event, x, y, pointer, button);
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                on = false;
+                super.touchUp(event, x, y, pointer, button);
             }
         });
 
@@ -69,9 +79,14 @@ public class ProgressControlElement extends Group {
         stop.addListener(new ClickListener(){
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                ProgressElement.getInstance().update();
                 boomBox.playSound(MSConstants.UI_MENU);
                 return super.touchDown(event, x, y, pointer, button);
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                ProgressElement.getInstance().update();
+                super.touchUp(event, x, y, pointer, button);
             }
         });
 

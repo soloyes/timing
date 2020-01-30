@@ -13,7 +13,7 @@ public class SimpleListElement extends AbstractListElement {
         list = new ArrayList<TimeBlock>();
         int sum = block.getRest() + block.getWork();
         float splitAmount = 1.0f * block.getWork() / sum;
-        timeBlock = new TimeBlock(0, 0, width, PaintConstants.SET_HEIGHT, splitAmount);
+        timeBlock = new TimeBlock(0, -PaintConstants.SET_HEIGHT / 2, width, PaintConstants.SET_HEIGHT, splitAmount);
         totalWork = block.getWork();
         totalRest = block.getRest();
         list.add(timeBlock);

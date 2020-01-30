@@ -13,7 +13,7 @@ public class ComplexListElement extends AbstractListElement {
         for (int i = 0; i < profileDAO.getBlocks().size(); i++) {
             int sum = profileDAO.getBlocks().get(i).getRest() + profileDAO.getBlocks().get(i).getWork();
             float splitAmount = 1.0f * profileDAO.getBlocks().get(i).getWork() / sum;
-            TimeBlock timeBlock = new TimeBlock(width / profileDAO.getBlocks().size() * i, 0, width / profileDAO.getBlocks().size(), PaintConstants.SET_HEIGHT, splitAmount);
+            TimeBlock timeBlock = new TimeBlock(width / profileDAO.getBlocks().size() * i, -PaintConstants.SET_HEIGHT / 2, width / profileDAO.getBlocks().size(), PaintConstants.SET_HEIGHT, splitAmount);
             totalWork += profileDAO.getBlocks().get(i).getWork();
             totalRest += profileDAO.getBlocks().get(i).getRest();
             list.add(timeBlock);

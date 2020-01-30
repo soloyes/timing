@@ -21,11 +21,13 @@ public final class PaintConstants {
     public static final int SET_HEIGHT = 30;
     public static final int MINUS_WIDTH = 30;
     public static final int TEXT_FIELD_WIDTH = 120;
+    public static final int LIST_EPSILON_WIDTH = 60;
+    public static final int LIST_ELEMENT_PAD = 10;
 
     public static final int DUMMY_PROFILES = 5;
     public static final String UI_EMPTY_PROFILE = "Empty";
-    public static final String UI_ADD_NEW_LINE = "Add new timing";
-    public static final String UI_ADD_NEW_BLOCK = "Add new time block";
+    public static final String UI_ADD_NEW_LINE = "Add Timing";
+    public static final String UI_ADD_NEW_BLOCK = "Add Block";
 
     public static final String BUTTON_PLAY = "btnctrlplay";
     public static final String BUTTON_PAUSE = "btnctrlpause";

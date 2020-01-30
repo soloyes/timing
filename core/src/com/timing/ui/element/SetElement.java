@@ -30,13 +30,13 @@ public class SetElement extends Group {
             this.addActor(complexListElement);
         }
 
-        this.setPosition(Rules.WORLD_WIDTH / 4, PaintConstants.SET_ELEMENT_HEIGHT);
+        this.setPosition((Rules.WORLD_WIDTH / 4) + PaintConstants.LIST_ELEMENT_PAD / 2, PaintConstants.SET_ELEMENT_HEIGHT);
     }
 
     public void update() {
         this.clear();
         ProfileDAO profileDAO = profiles.getActive();
-        if (profileDAO != null){
+        if (profileDAO != null) {
             complexListElement = new ComplexListElement(profileDAO);
             this.addActor(complexListElement);
         }

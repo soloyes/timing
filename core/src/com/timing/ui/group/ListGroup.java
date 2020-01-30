@@ -43,10 +43,15 @@ public class ListGroup extends Group {
         this.back.setBounds(Rules.WORLD_WIDTH / 2 - PaintConstants.BUTTON_SPACE, PaintConstants.PROGRESS_CONTROL_ELEMENT_HEIGHT, PaintConstants.BUTTON_WIDTH, PaintConstants.BUTTON_HEIGHT);
         back.addListener(new ClickListener() {
             @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                boomBox.playSound(MSConstants.UI_MENU);
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                super.touchUp(event, x, y, pointer, button);
                 ListGroup.getInstance().switchVisible();
                 ProgressGroup.getInstance().switchVisible();
+            }
+
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                boomBox.playSound(MSConstants.UI_MENU);
                 return super.touchDown(event, x, y, pointer, button);
             }
         });
