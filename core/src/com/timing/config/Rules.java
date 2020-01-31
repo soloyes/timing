@@ -15,7 +15,7 @@ public final class Rules {
     //1080
     public static final int WORLD_HEIGHT = 540;
     //Percentage 10
-    public static final float LOADING_HEIGHT = 10.0f;
+    public static final float LOADING_HEIGHT = 5.0f;
 
     //1.0f
     public static final float LINE_PRESSED_WAIT = 1.0f;
