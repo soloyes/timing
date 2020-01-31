@@ -3,7 +3,6 @@ package com.timing.utils;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.FileHandleResolver;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -37,8 +36,6 @@ public class Assets {
             case MAIN:
                 assetManager.load(PaintConstants.PACK, TextureAtlas.class);
                 assetManager.load(PaintConstants.SKIN_FILE, Skin.class);
-                assetManager.load(MSConstants.HUM_MUSIC_EFFECT_1, Music.class);
-                assetManager.load(MSConstants.HUM_MUSIC_EFFECT_2, Music.class);
 
                 assetManager.load(MSConstants.UI_CHANGED, Sound.class);
                 assetManager.load(MSConstants.UI_MENU, Sound.class);

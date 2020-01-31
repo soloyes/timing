@@ -26,6 +26,9 @@ public final class PaintConstants {
     public static final int LIST_EPSILON_WIDTH = 60;
     public static final int LIST_ELEMENT_PAD = 10;
 
+    public static final int TIMING_WIDTH = 256;
+    public static final int TIMING_HEIGHT = 256;
+
     public static final int DUMMY_PROFILES = 5;
     public static final String UI_EMPTY_PROFILE = "Empty";
     public static final String UI_ADD_NEW_LINE = "Add Timing";
@@ -40,6 +43,8 @@ public final class PaintConstants {
     public static final String BUTTON_LOOP = "btnsetloop";
 
     public static final String BUTTON_BACK = "btnothback";
+    public static final String BUTTON_HOME = "btnothhome";
+    public static final String TIMING = "timing.png";
 
     public static final String FONT32 = "fonts/CollegeRegular32.ttf";
     public static final String FONT64 = "fonts/CollegeRegular64.ttf";

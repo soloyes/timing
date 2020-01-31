@@ -3,6 +3,8 @@ package com.timing.screens;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.timing.config.PaintConstants;
 import com.timing.config.Rules;
 import com.timing.utils.Assets;
 import com.timing.utils.ScreenManager;
@@ -15,6 +17,7 @@ public class LoadingScreen extends BaseScreen {
     private SpriteBatch batch;
     private Texture texture;
     private Pixmap pixmap;
+    private TextureRegion textureRegion;
 
     public LoadingScreen(SpriteBatch batch) {
         super(batch);
@@ -23,6 +26,7 @@ public class LoadingScreen extends BaseScreen {
         pixmap.setColor(1.0f, 0.5f, 0.5f, 1f);
         pixmap.fill();
         this.texture = new Texture(pixmap);
+        this.textureRegion = new TextureRegion(new Texture("pics/" + PaintConstants.TIMING));
     }
 
     @Override
@@ -39,6 +43,7 @@ public class LoadingScreen extends BaseScreen {
         }
         batch.begin();
         batch.draw(texture, 0, 0, Rules.WORLD_WIDTH * Assets.getInstance().getAssetManager().getProgress(), (int) (Rules.WORLD_HEIGHT * (Rules.LOADING_HEIGHT / 100)));
+        batch.draw(textureRegion, Rules.WORLD_WIDTH / 2 - PaintConstants.TIMING_WIDTH / 2, Rules.WORLD_HEIGHT / 2 - PaintConstants.TIMING_HEIGHT / 2, PaintConstants.TIMING_WIDTH, PaintConstants.TIMING_HEIGHT);
         batch.end();
     }
 
@@ -46,6 +51,7 @@ public class LoadingScreen extends BaseScreen {
     public void dispose() {
         super.dispose();
         texture.dispose();
+        textureRegion.getTexture().dispose();
         pixmap.dispose();
     }
 }

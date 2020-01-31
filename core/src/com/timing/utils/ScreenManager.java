@@ -88,6 +88,6 @@ public class ScreenManager {
     }
 
     public enum ScreenType {
-        MAIN
+        MAIN, LOADING
     }
 }

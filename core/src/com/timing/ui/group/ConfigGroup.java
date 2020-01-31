@@ -30,6 +30,7 @@ public class ConfigGroup extends Group {
     private VerticalElementList verticalElementList;
 
     private Button back;
+    private Button home;
     private BoomBox boomBox;
 
     public static ConfigGroup getInstance() {
@@ -45,7 +46,13 @@ public class ConfigGroup extends Group {
         this.back = new UIButton(
                 new TextureRegionDrawable(Assets.getInstance().getAtlas().findRegion(PaintConstants.BUTTON_BACK))
         );
-        this.back.setBounds(Rules.WORLD_WIDTH / 2 - PaintConstants.BUTTON_SPACE, PaintConstants.PROGRESS_CONTROL_ELEMENT_HEIGHT, PaintConstants.BUTTON_WIDTH, PaintConstants.BUTTON_HEIGHT);
+        this.home = new UIButton(
+                new TextureRegionDrawable(Assets.getInstance().getAtlas().findRegion(PaintConstants.BUTTON_HOME))
+        );
+
+        this.back.setBounds(Rules.WORLD_WIDTH / 2 - 2 * PaintConstants.BUTTON_SPACE, PaintConstants.PROGRESS_CONTROL_ELEMENT_HEIGHT, PaintConstants.BUTTON_WIDTH, PaintConstants.BUTTON_HEIGHT);
+        this.home.setBounds(Rules.WORLD_WIDTH / 2 + PaintConstants.BUTTON_SPACE / 2, PaintConstants.PROGRESS_CONTROL_ELEMENT_HEIGHT, PaintConstants.BUTTON_WIDTH, PaintConstants.BUTTON_HEIGHT);
+
         back.addListener(new ClickListener() {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
@@ -60,9 +67,27 @@ public class ConfigGroup extends Group {
                 return super.touchDown(event, x, y, pointer, button);
             }
         });
-        this.addActor(back);
+
+        home.addListener(new ClickListener() {
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                super.touchUp(event, x, y, pointer, button);
+                ProgressGroup.getInstance().switchVisible();
+                ConfigGroup.getInstance().switchVisible();
+            }
+
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                boomBox.playSound(MSConstants.UI_MENU);
+                return super.touchDown(event, x, y, pointer, button);
+            }
+        });
+
         this.verticalElementList = new VerticalElementList();
         this.addActor(verticalElementList);
+
+        this.addActor(back);
+        this.addActor(home);
     }
 
     public void switchVisible() {

@@ -3,7 +3,7 @@ images1.png
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-btnctrlpause
+btnsetloop
   rotate: false
   xy: 2, 2
   size: 139, 139
@@ -17,7 +17,7 @@ btnsetedit
   orig: 139, 139
   offset: 0, 0
   index: -1
-btnctrlplay
+btnsetcreate
   rotate: false
   xy: 2, 284
   size: 139, 139
@@ -31,42 +31,42 @@ btnctrlstop
   orig: 139, 139
   offset: 0, 0
   index: -1
-btnsetcreate
+btnctrlplay
   rotate: false
   xy: 2, 566
   size: 139, 139
   orig: 139, 139
   offset: 0, 0
   index: -1
-btnsetloop
+btnctrlpause
   rotate: false
   xy: 2, 707
   size: 139, 139
   orig: 139, 139
   offset: 0, 0
   index: -1
-btnothno
+btnothok
   rotate: false
   xy: 2, 848
   size: 138, 138
   orig: 138, 138
   offset: 0, 0
   index: -1
-btnothok
+btnothno
   rotate: false
   xy: 2, 988
   size: 138, 138
   orig: 138, 138
   offset: 0, 0
   index: -1
-btnothback
+btnothhome
   rotate: false
   xy: 2, 1128
   size: 138, 138
   orig: 138, 138
   offset: 0, 0
   index: -1
-btnothhome
+btnothback
   rotate: false
   xy: 2, 1268
   size: 138, 138
