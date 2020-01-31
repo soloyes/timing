@@ -45,6 +45,8 @@ public class Assets {
                 assetManager.load(MSConstants.UI_CLICK, Sound.class);
                 assetManager.load(MSConstants.UI_INPUT, Sound.class);
                 assetManager.load(MSConstants.UI_PAUSE, Sound.class);
+                assetManager.load(MSConstants.UI_WORK, Sound.class);
+                assetManager.load(MSConstants.UI_REST, Sound.class);
                 createStandardFont(32, "");
                 createStandardFont(64, "");
                 createStandardFont(128, "");

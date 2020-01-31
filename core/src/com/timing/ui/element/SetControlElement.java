@@ -44,7 +44,7 @@ public class SetControlElement extends Group {
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 ListGroup.getInstance().switchVisible();
                 ProgressGroup.getInstance().switchVisible();
-                ProgressElement.getInstance().update();
+                ProgressElement.getInstance().reset();
                 super.touchUp(event, x, y, pointer, button);
             }
         });
@@ -63,7 +63,7 @@ public class SetControlElement extends Group {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 ConfigGroup.getInstance().showActive();
-                ProgressElement.getInstance().update();
+                ProgressElement.getInstance().reset();
                 super.touchUp(event, x, y, pointer, button);
             }
 

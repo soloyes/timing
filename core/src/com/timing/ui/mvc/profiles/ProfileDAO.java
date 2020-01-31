@@ -36,7 +36,7 @@ public class ProfileDAO {
 
     @Getter
     @Setter
-    private List<Values> blocks;
+    private List<Value> blocks;
 
     private ProfileDAO() {
     }
@@ -49,7 +49,7 @@ public class ProfileDAO {
         this.blocks = profile.getBlocks();
     }
 
-    public ProfileDAO(Type type, String name, Map<String, Object> preferences, boolean active, List<Values> blocks) {
+    public ProfileDAO(Type type, String name, Map<String, Object> preferences, boolean active, List<Value> blocks) {
         this.type = type;
         this.name = name;
         this.preferences = preferences;
@@ -58,7 +58,7 @@ public class ProfileDAO {
         this.id = UUID.randomUUID().toString();
     }
 
-    public static class Values {
+    public static class Value {
         @Getter
         @Setter
         private int work;
@@ -66,10 +66,10 @@ public class ProfileDAO {
         @Setter
         private int rest;
 
-        public Values() {
+        public Value() {
         }
 
-        public Values(int work, int rest) {
+        public Value(int work, int rest) {
             this.work = work;
             this.rest = rest;
         }

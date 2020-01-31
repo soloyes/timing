@@ -7,6 +7,8 @@ package com.timing.config;
 public final class PaintConstants {
     public static final String PACK = "pics/game.pack";
     public static final String BACKGROUND_COLOR_HEX = "282828ff";
+    public static final String WORK_COLOR_HEX = "0261e8ff";
+    public static final String REST_COLOR_HEX = "f7ce26ff";
     public static final String SKIN_FILE = "uiskin/ui.json";
 
     public static final int BUTTON_WIDTH = 60;

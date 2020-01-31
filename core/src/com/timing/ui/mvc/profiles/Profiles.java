@@ -32,8 +32,8 @@ public class Profiles implements Model<ProfileDAO> {
     }
 
     private static ProfileDAO asEmpty() {
-        ArrayList<ProfileDAO.Values> blocks = new ArrayList<ProfileDAO.Values>();
-        blocks.add(new ProfileDAO.Values(Rules.DEFAULT_WORK_TIME, Rules.DEFAULT_REST_TIME));
+        ArrayList<ProfileDAO.Value> blocks = new ArrayList<ProfileDAO.Value>();
+        blocks.add(new ProfileDAO.Value(Rules.DEFAULT_WORK_TIME, Rules.DEFAULT_REST_TIME));
         return new ProfileDAO(ProfileDAO.Type.PROFILE, PaintConstants.UI_EMPTY_PROFILE, AppPreferences.defaults, false, blocks);
     }
 
@@ -82,8 +82,8 @@ public class Profiles implements Model<ProfileDAO> {
     }
 
     private static ProfileDAO asDummy() {
-        ArrayList<ProfileDAO.Values> blocks = new ArrayList<ProfileDAO.Values>();
-        blocks.add(new ProfileDAO.Values(Rules.DEFAULT_WORK_TIME, Rules.DEFAULT_REST_TIME));
+        ArrayList<ProfileDAO.Value> blocks = new ArrayList<ProfileDAO.Value>();
+        blocks.add(new ProfileDAO.Value(Rules.DEFAULT_WORK_TIME, Rules.DEFAULT_REST_TIME));
         return new ProfileDAO(ProfileDAO.Type.DUMMY, "", null, false, blocks);
     }
 

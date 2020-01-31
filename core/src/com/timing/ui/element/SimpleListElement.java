@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class SimpleListElement extends AbstractListElement {
     private TimeBlock timeBlock;
 
-    public SimpleListElement(ProfileDAO.Values block) {
+    public SimpleListElement(ProfileDAO.Value block) {
         list = new ArrayList<TimeBlock>();
         int sum = block.getRest() + block.getWork();
         float splitAmount = 1.0f * block.getWork() / sum;

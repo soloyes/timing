@@ -25,6 +25,8 @@ public final class MSConstants {
     public static final String UI_CLICK = UI + "ui_click.ogg";
     public static final String UI_MENU = UI + "ui_menu_button.ogg";
     public static final String UI_PAUSE = UI + "ui_pause_button.ogg";
+    public static final String UI_WORK = UI + "ui_work.ogg";
+    public static final String UI_REST = UI + "ui_rest.ogg";
     //
 
     //SONG/MUSIC

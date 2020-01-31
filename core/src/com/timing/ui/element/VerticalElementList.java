@@ -98,7 +98,7 @@ public class VerticalElementList extends VerticalGroup {
             plus.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    ProfileDAO.Values block = new ProfileDAO.Values(30, 30);
+                    ProfileDAO.Value block = new ProfileDAO.Value(30, 30);
                     profileDAO.getBlocks().add(block);
                     Line line = new Line(new SimpleListElement(block), block);
                     lines.add(line);
@@ -124,9 +124,9 @@ public class VerticalElementList extends VerticalGroup {
         private Table innerTable;
         private TextField work;
         private TextField rest;
-        private ProfileDAO.Values block;
+        private ProfileDAO.Value block;
 
-        Line(final SimpleListElement simpleListElement, final ProfileDAO.Values block) {
+        Line(final SimpleListElement simpleListElement, final ProfileDAO.Value block) {
             this.block = block;
             this.table = new Table();
             table.row();

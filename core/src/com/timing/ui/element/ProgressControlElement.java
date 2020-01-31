@@ -85,7 +85,7 @@ public class ProgressControlElement extends Group {
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                ProgressElement.getInstance().update();
+                ProgressElement.getInstance().reset();
                 super.touchUp(event, x, y, pointer, button);
             }
         });

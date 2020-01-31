@@ -7,14 +7,14 @@ import com.timing.Timing;
 
 public class HtmlLauncher extends GwtApplication {
 
-        // USE THIS CODE FOR A FIXED SIZE APPLICATION
+        // USE THIS CODE FOR Item FIXED SIZE APPLICATION
         @Override
         public GwtApplicationConfiguration getConfig () {
                 return new GwtApplicationConfiguration(480, 320);
         }
         // END CODE FOR FIXED SIZE APPLICATION
 
-        // UNCOMMENT THIS CODE FOR A RESIZABLE APPLICATION
+        // UNCOMMENT THIS CODE FOR Item RESIZABLE APPLICATION
         // PADDING is to avoid scrolling in iframes, set to 20 if you have problems
         // private static final int PADDING = 0;
         // private GwtApplicationConfiguration cfg;
