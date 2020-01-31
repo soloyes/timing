@@ -14,13 +14,13 @@ public final class Rules {
     public static final int WORLD_WIDTH = 960;
     //1080
     public static final int WORLD_HEIGHT = 540;
-    //Percentage 10
+    //Percentage 5
     public static final float LOADING_HEIGHT = 5.0f;
 
     //1.0f
-    public static final float LINE_PRESSED_WAIT = 1.0f;
+    public static final float LINE_PRESSED_WAIT = 0.5f;
     //3.0f
-    public static final float LINE_DELETE_WAIT = 3.0f;
+    public static final float LINE_DELETE_WAIT = 2.0f;
 
     //
     public static final int DEFAULT_WORK_TIME = 30;
@@ -28,8 +28,4 @@ public final class Rules {
 
     //
     public static final int GRANULARITY = 100;
-
-    //MUSIC
-    //2
-    public static final int MUSIC_EFFECT_PROBABILITY = 2;
 }

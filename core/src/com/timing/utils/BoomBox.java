@@ -2,13 +2,9 @@ package com.timing.utils;
 
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 import com.timing.config.AppPreferences;
-import com.timing.config.MSConstants;
-import com.timing.config.Rules;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,32 +14,6 @@ import java.util.Map;
 public class BoomBox {
     private static Array<Sound> soundIdList = new Array<Sound>();
     private static Array<Music> musicArray = new Array<Music>();
-    private static ArrayList<String> musicEffects = new ArrayList<String>();
-    private float t = 0.0f;
-
-    static {
-        musicEffects.add(MSConstants.HUM_MUSIC_EFFECT_1);
-        musicEffects.add(MSConstants.HUM_MUSIC_EFFECT_2);
-    }
-
-    public void playRandomMusicEffects(float dt) {
-        t += dt;
-        if (t >= 1.0f) {
-            if (MathUtils.random(0, 100) <= Rules.MUSIC_EFFECT_PROBABILITY) {
-                boolean flag = true;
-                for (int i = 0; i < musicEffects.size(); i++) {
-                    if (isPlaying(musicEffects.get(i))) {
-                        flag = false;
-                    }
-                }
-                if (flag) {
-                    String musicEffect = musicEffects.get(MathUtils.random(0, musicEffects.size() - 1));
-                    playMusicEffectOnce(musicEffect);
-                }
-            }
-            t = 0.0f;
-        }
-    }
 
     public void setMusicEffectVolume(String musicEffect, float volume) {
         if (AppPreferences.isEffectsEnabled()) {
