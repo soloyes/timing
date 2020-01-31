@@ -126,12 +126,11 @@ public class ProgressElement extends Group {
         ProgressControlElement.getInstance().setOn(false);
     }
 
-    //todo: перекинуть в Value. Кажется что там ему и место. Плюс это будет шаг к тому, чтобы хранить в конфиге цвет, звук и тп.
     private class Item {
         private Type type;
         private int value;
 
-        public Item(Type type, int value) {
+        Item(Type type, int value) {
             this.type = type;
             this.value = value;
         }

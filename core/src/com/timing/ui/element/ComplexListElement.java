@@ -6,6 +6,10 @@ import com.timing.ui.mvc.profiles.ProfileDAO;
 
 import java.util.ArrayList;
 
+/**
+ * @author Shuttle on 15/01/20.
+ */
+
 public class ComplexListElement extends AbstractListElement {
 
     public ComplexListElement(ProfileDAO profileDAO) {

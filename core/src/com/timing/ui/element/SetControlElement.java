@@ -22,6 +22,7 @@ import lombok.Getter;
 /**
  * @author Shuttle on 16/01/20.
  */
+
 public class SetControlElement extends Group {
     @Getter
     private static SetControlElement instance = new SetControlElement();

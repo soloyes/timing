@@ -9,6 +9,10 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * @author Shuttle on 15/01/20.
+ */
+
 public class SubBlock extends Actor {
     private Pixmap pixmap;
     private Texture texture;

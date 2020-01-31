@@ -2,6 +2,10 @@ package com.timing.utils;
 
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 
+/**
+ * @author Shuttle on 15/01/20.
+ */
+
 public class DigitFilter implements TextField.TextFieldFilter {
     private char[] accepted;
 

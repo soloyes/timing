@@ -75,7 +75,7 @@ public class ListGroup extends Group {
         groupController.dispose();
     }
 
-    public void update(){
+    public void update() {
         groupController.update();
     }
 }

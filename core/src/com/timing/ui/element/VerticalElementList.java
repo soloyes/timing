@@ -34,6 +34,10 @@ import com.timing.utils.DigitInputListener;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * @author Shuttle on 15/01/20.
+ */
+
 public class VerticalElementList extends VerticalGroup {
     private final ScrollPane scrollPane;
     private VerticalGroup verticalGroup;

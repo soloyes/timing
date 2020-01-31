@@ -8,6 +8,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.SplitPane;
 import com.timing.config.PaintConstants;
 import com.timing.utils.Assets;
 
+/**
+ * @author Shuttle on 15/01/20.
+ */
+
 public class TimeBlock extends Group {
     private SplitPane pane;
     private SubBlock work;

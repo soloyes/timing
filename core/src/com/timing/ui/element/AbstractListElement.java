@@ -9,6 +9,10 @@ import java.util.List;
 
 import lombok.Getter;
 
+/**
+ * @author Shuttle on 15/01/20.
+ */
+
 public abstract class AbstractListElement extends Group {
     protected static int width = Rules.WORLD_WIDTH / 2 - PaintConstants.LIST_ELEMENT_PAD;
     @Getter
