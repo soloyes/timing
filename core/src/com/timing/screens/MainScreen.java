@@ -54,5 +54,6 @@ public class MainScreen extends BaseScreen {
     public void dispose() {
         super.dispose();
         ListGroup.getInstance().dispose();
+        ProgressGroup.getInstance().dispose();
     }
 }

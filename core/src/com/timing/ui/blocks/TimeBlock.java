@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.SplitPane;
+import com.badlogic.gdx.scenes.scene2d.utils.BaseDrawable;
 import com.timing.config.PaintConstants;
 import com.timing.utils.Assets;
 
@@ -31,6 +32,8 @@ public class TimeBlock extends Group {
         this.pane.setBounds(x, y, width, height);
         pane.setSplitAmount(splitAmount);
         pane.clearListeners();
+        //Empty black line in the middle of pane :)
+        pane.getStyle().handle = new BaseDrawable();
         this.addActor(pane);
     }
 

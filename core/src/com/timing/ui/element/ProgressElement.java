@@ -31,6 +31,8 @@ public class ProgressElement extends Group {
     private Profiles profiles;
     private ProfileDAO profileDAO;
     private float progress;
+    @Getter
+    private float totalProgress;
     private LinkedList<Item> queue;
     private Item item;
     private BoomBox boomBox;
@@ -40,6 +42,7 @@ public class ProgressElement extends Group {
         this.boomBox = new BoomBox();
         this.profiles = new Profiles();
         this.progressBar = new ProgressBar(0, 100, 1, false, skin);
+
         this.progressBar.getStyle().background.setMinHeight(PaintConstants.PLAY_PROGRESS_BAR_HEIGHT);
         this.progressBar.getStyle().knobBefore.setMinHeight(PaintConstants.PLAY_PROGRESS_BAR_HEIGHT - 12);
         this.progressBar.setBounds(Rules.WORLD_WIDTH / 6, PaintConstants.PROGRESS_ELEMENT_HEIGHT, 2 * Rules.WORLD_WIDTH / 3, PaintConstants.PLAY_PROGRESS_BAR_HEIGHT);
@@ -64,6 +67,7 @@ public class ProgressElement extends Group {
                         progressBar.setColor(Color.valueOf(PaintConstants.REST_COLOR_HEX));
                 }
                 progress += delta;
+                totalProgress += delta;
                 progressBar.setValue(progress);
             }
         }
@@ -122,6 +126,7 @@ public class ProgressElement extends Group {
         }
         progressBar.setColor(Color.valueOf(PaintConstants.WORK_COLOR_HEX));
         progress = 0.0f;
+        totalProgress = 0.0f;
         progressBar.setValue(progress);
         ProgressControlElement.getInstance().setOn(false);
     }

@@ -15,11 +15,19 @@ public class ComplexListElement extends AbstractListElement {
     public ComplexListElement(ProfileDAO profileDAO) {
         this.list = new ArrayList<TimeBlock>();
         for (int i = 0; i < profileDAO.getBlocks().size(); i++) {
-            int sum = profileDAO.getBlocks().get(i).getRest() + profileDAO.getBlocks().get(i).getWork();
-            float splitAmount = 1.0f * profileDAO.getBlocks().get(i).getWork() / sum;
-            TimeBlock timeBlock = new TimeBlock(width / profileDAO.getBlocks().size() * i, -PaintConstants.SET_HEIGHT / 2, width / profileDAO.getBlocks().size(), PaintConstants.SET_HEIGHT, splitAmount);
             totalWork += profileDAO.getBlocks().get(i).getWork();
             totalRest += profileDAO.getBlocks().get(i).getRest();
+        }
+
+        int total = totalWork + totalRest;
+        int x = 0;
+
+        for (int i = 0; i < profileDAO.getBlocks().size(); i++) {
+            int sum = profileDAO.getBlocks().get(i).getRest() + profileDAO.getBlocks().get(i).getWork();
+            float splitAmount = 1.0f * profileDAO.getBlocks().get(i).getWork() / sum;
+            int w = (int) (width * (1.0f * sum / total));
+            TimeBlock timeBlock = new TimeBlock(x, -PaintConstants.SET_HEIGHT / 2, w, PaintConstants.SET_HEIGHT, splitAmount);
+            x += w;
             list.add(timeBlock);
             this.addActor(timeBlock);
         }
