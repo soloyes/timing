@@ -15,13 +15,11 @@ import lombok.Getter;
 /**
  * @author Shuttle on 16/01/20.
  */
-
 public class SetElement extends Group {
     @Getter
     private static SetElement instance = new SetElement();
     private Profiles profiles;
     private ComplexListElement complexListElement;
-
     private Pixmap pixmap;
     private Texture texture;
 
@@ -44,6 +42,25 @@ public class SetElement extends Group {
         this.texture = new Texture(pixmap);
     }
 
+    @Override
+    public void draw(Batch batch, float parentAlpha) {
+        super.draw(batch, parentAlpha);
+        Color color = batch.getColor();
+        batch.setColor(batch.getColor().r, batch.getColor().g, batch.getColor().b, 0.6f);
+        if (complexListElement != null) {
+            batch.draw(texture,
+                    (Rules.WORLD_WIDTH / 4) + PaintConstants.LIST_ELEMENT_PAD / 2, PaintConstants.SET_ELEMENT_HEIGHT - PaintConstants.SET_HEIGHT / 2,
+                    (Rules.WORLD_WIDTH / 2 - PaintConstants.LIST_ELEMENT_PAD) * (ProgressElement.getInstance().getTotalProgress()) / (complexListElement.getTotalWork() + complexListElement.getTotalRest()), PaintConstants.SET_HEIGHT
+            );
+        }
+        batch.setColor(color);
+    }
+
+    public void dispose() {
+        pixmap.dispose();
+        texture.dispose();
+    }
+
     public void update() {
         this.clear();
         ProfileDAO profileDAO = profiles.getActive();
@@ -51,22 +68,5 @@ public class SetElement extends Group {
             complexListElement = new ComplexListElement(profileDAO);
             this.addActor(complexListElement);
         }
-    }
-
-    @Override
-    public void draw(Batch batch, float parentAlpha) {
-        super.draw(batch, parentAlpha);
-        Color color = batch.getColor();
-        batch.setColor(batch.getColor().r, batch.getColor().g, batch.getColor().b, 0.6f);
-        batch.draw(texture,
-                (Rules.WORLD_WIDTH / 4) + PaintConstants.LIST_ELEMENT_PAD / 2, PaintConstants.SET_ELEMENT_HEIGHT - PaintConstants.SET_HEIGHT / 2,
-                (Rules.WORLD_WIDTH / 2 - PaintConstants.LIST_ELEMENT_PAD) * (ProgressElement.getInstance().getTotalProgress()) / (complexListElement.getTotalWork() + complexListElement.getTotalRest()), PaintConstants.SET_HEIGHT
-        );
-        batch.setColor(color);
-    }
-
-    public void dispose() {
-        pixmap.dispose();
-        texture.dispose();
     }
 }
