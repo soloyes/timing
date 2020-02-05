@@ -32,4 +32,10 @@ public class ComplexListElement extends AbstractListElement {
             this.addActor(timeBlock);
         }
     }
+
+    public void setA(float a) {
+        for (int i = 0; i < list.size(); i++) {
+            list.get(i).setA(a);
+        }
+    }
 }

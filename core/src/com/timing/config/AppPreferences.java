@@ -30,7 +30,7 @@ public class AppPreferences {
         put(PREF_MUSIC_ENABLED, true);
         put(PREF_MUSIC_VOLUME, 0.5f);
         put(PREF_VIBRATION_ENABLED, true);
-        put(PREF_TIME_FORMAT, 1.0f);
+        put(PREF_TIME_FORMAT, 60.0f);
     }};
 
     public static void apply(Map<String, Object> preferences) {

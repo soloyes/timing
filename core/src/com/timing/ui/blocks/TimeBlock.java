@@ -51,4 +51,9 @@ public class TimeBlock extends Group {
         batch.setColor(1.0f, 1.0f, 1.0f, 1.0f);
         super.draw(batch, parentAlpha);
     }
+
+    public void setA(float a) {
+        work.setA(a);
+        rest.setA(a);
+    }
 }

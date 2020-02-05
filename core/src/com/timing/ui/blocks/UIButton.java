@@ -2,16 +2,20 @@ package com.timing.ui.blocks;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 
 /**
  * @author Shuttle on 15/01/20.
  */
 
-public class UIButton extends ImageButton {
+public class UIButton extends Button {
     public UIButton(Drawable imageUp) {
         super(imageUp);
+    }
+
+    public UIButton(Drawable imageUp, Drawable imageDown) {
+        super(imageUp, imageDown);
     }
 
     @Override
@@ -29,6 +33,6 @@ public class UIButton extends ImageButton {
 
     @Override
     public void setColor(Color color) {
-        getImage().setColor(color);
+        super.setColor(color);
     }
 }

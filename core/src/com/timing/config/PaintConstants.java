@@ -26,6 +26,9 @@ public final class PaintConstants {
     public static final int LIST_EPSILON_WIDTH = 60;
     public static final int LIST_ELEMENT_PAD = 10;
 
+    public static final float SET_ELEMENT_ALPHA = 0.45f;
+    public static final float SET_ELEMENT_PROGRESS_ALPHA = 0.6f;
+
     public static final int TIMING_WIDTH = 256;
     public static final int TIMING_HEIGHT = 256;
 

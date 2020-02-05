@@ -15,10 +15,13 @@ import lombok.Setter;
 
 public class SubBlock extends Actor {
     private Pixmap pixmap;
+    @Getter
     private Texture texture;
     @Getter
     @Setter
     private Color color;
+    @Setter
+    private float a = 1.0f;
     private int width;
     private int height;
 
@@ -34,7 +37,10 @@ public class SubBlock extends Actor {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
+        Color color = batch.getColor();
+        batch.setColor(color.r, color.g, color.b, a);
         batch.draw(texture, 0, 0, width, height);
+        batch.setColor(color);
     }
 
     public void dispose() {

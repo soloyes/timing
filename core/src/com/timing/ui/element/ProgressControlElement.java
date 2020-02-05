@@ -29,17 +29,20 @@ public class ProgressControlElement extends Group {
     private boolean on = false;
 
     private Button play;
-    private Button pause;
     private Button stop;
+    private TextureRegionDrawable up;
+    private TextureRegionDrawable down;
 
     private BoomBox boomBox;
 
     private ProgressControlElement() {
         this.boomBox = new BoomBox();
-        this.play = new UIButton(
-                new TextureRegionDrawable(Assets.getInstance().getAtlas().findRegion(PaintConstants.BUTTON_PLAY))
+        this.up = new TextureRegionDrawable(Assets.getInstance().getAtlas().findRegion(PaintConstants.BUTTON_PLAY));
+        this.down = new TextureRegionDrawable(Assets.getInstance().getAtlas().findRegion(PaintConstants.BUTTON_PAUSE));
+        this.play = new UIButton(up);
+        this.play.setBounds(Rules.WORLD_WIDTH / 6 - PaintConstants.BUTTON_WIDTH - PaintConstants.LIST_ELEMENT_PAD, PaintConstants.PROGRESS_ELEMENT_HEIGHT + (PaintConstants.PLAY_PROGRESS_BAR_HEIGHT - PaintConstants.BUTTON_HEIGHT) / 2,
+                PaintConstants.BUTTON_WIDTH, PaintConstants.BUTTON_HEIGHT
         );
-        this.play.setBounds(Rules.WORLD_WIDTH / 2 - PaintConstants.BUTTON_SPACE - 3 * PaintConstants.BUTTON_WIDTH / 2, PaintConstants.PROGRESS_CONTROL_ELEMENT_HEIGHT, PaintConstants.BUTTON_WIDTH, PaintConstants.BUTTON_HEIGHT);
         play.addListener(new ClickListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -49,33 +52,25 @@ public class ProgressControlElement extends Group {
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                on = true;
                 super.touchUp(event, x, y, pointer, button);
-            }
-        });
-
-        this.pause = new UIButton(
-                new TextureRegionDrawable(Assets.getInstance().getAtlas().findRegion(PaintConstants.BUTTON_PAUSE))
-        );
-        this.pause.setBounds(Rules.WORLD_WIDTH / 2 - PaintConstants.BUTTON_SPACE, PaintConstants.PROGRESS_CONTROL_ELEMENT_HEIGHT, PaintConstants.BUTTON_WIDTH, PaintConstants.BUTTON_HEIGHT);
-        pause.addListener(new ClickListener() {
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                boomBox.playSound(MSConstants.UI_MENU);
-                return super.touchDown(event, x, y, pointer, button);
-            }
-
-            @Override
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                on = false;
-                super.touchUp(event, x, y, pointer, button);
+                if (play.isOver()) {
+                    on = !on;
+                    if (on) {
+                        play.getStyle().checked = down;
+                    } else {
+                        down = (TextureRegionDrawable) play.getStyle().checked;
+                        play.getStyle().checked = null;
+                    }
+                }
             }
         });
 
         this.stop = new UIButton(
                 new TextureRegionDrawable(Assets.getInstance().getAtlas().findRegion(PaintConstants.BUTTON_STOP))
         );
-        this.stop.setBounds(Rules.WORLD_WIDTH / 2 + PaintConstants.BUTTON_SPACE + PaintConstants.BUTTON_WIDTH / 2, PaintConstants.PROGRESS_CONTROL_ELEMENT_HEIGHT, PaintConstants.BUTTON_WIDTH, PaintConstants.BUTTON_HEIGHT);
+        this.stop.setBounds(5 * Rules.WORLD_WIDTH / 6 + PaintConstants.LIST_ELEMENT_PAD, PaintConstants.PROGRESS_ELEMENT_HEIGHT + (PaintConstants.PLAY_PROGRESS_BAR_HEIGHT - PaintConstants.BUTTON_HEIGHT) / 2,
+                PaintConstants.BUTTON_WIDTH, PaintConstants.BUTTON_HEIGHT
+        );
         stop.addListener(new ClickListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -85,13 +80,15 @@ public class ProgressControlElement extends Group {
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                ProgressElement.getInstance().reset();
+                if (stop.isOver()) {
+                    ProgressElement.getInstance().reset();
+                    reset();
+                }
                 super.touchUp(event, x, y, pointer, button);
             }
         });
 
         this.addActor(play);
-        this.addActor(pause);
         this.addActor(stop);
     }
 
@@ -103,9 +100,11 @@ public class ProgressControlElement extends Group {
     @Override
     public void draw(Batch batch, float parentAlpha) {
         play.draw(batch, parentAlpha);
-        pause.draw(batch, parentAlpha);
         stop.draw(batch, parentAlpha);
-
         batch.setColor(1.0f, 1.0f, 1.0f, 1.0f);
+    }
+
+    public void reset() {
+        play.setChecked(false);
     }
 }

@@ -11,7 +11,6 @@ import com.timing.config.MSConstants;
 import com.timing.config.PaintConstants;
 import com.timing.config.Rules;
 import com.timing.ui.blocks.UIButton;
-import com.timing.ui.group.ConfigGroup;
 import com.timing.ui.group.ListGroup;
 import com.timing.ui.group.ProgressGroup;
 import com.timing.utils.Assets;
@@ -27,7 +26,6 @@ public class SetControlElement extends Group {
     @Getter
     private static SetControlElement instance = new SetControlElement();
     private Button create;
-    private Button edit;
     private Button loop;
 
     private BoomBox boomBox;
@@ -37,37 +35,23 @@ public class SetControlElement extends Group {
     private SetControlElement() {
         this.boomBox = new BoomBox();
         this.create = new UIButton(
-                new TextureRegionDrawable(Assets.getInstance().getAtlas().findRegion(PaintConstants.BUTTON_CREATE))
-        );
-        this.create.setBounds(Rules.WORLD_WIDTH / 2 - PaintConstants.BUTTON_SPACE - 3 * PaintConstants.BUTTON_WIDTH / 2, PaintConstants.SET_CONTROL_ELEMENT_HEIGHT, PaintConstants.BUTTON_WIDTH, PaintConstants.BUTTON_HEIGHT);
-        create.addListener(new ClickListener() {
-            @Override
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                ListGroup.getInstance().switchVisible();
-                ProgressGroup.getInstance().switchVisible();
-                ProgressElement.getInstance().reset();
-                super.touchUp(event, x, y, pointer, button);
-            }
-        });
-        create.addListener(new ClickListener() {
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                boomBox.playSound(MSConstants.UI_MENU);
-                return super.touchDown(event, x, y, pointer, button);
-            }
-        });
-        this.edit = new UIButton(
+                new TextureRegionDrawable(Assets.getInstance().getAtlas().findRegion(PaintConstants.BUTTON_CREATE)),
                 new TextureRegionDrawable(Assets.getInstance().getAtlas().findRegion(PaintConstants.BUTTON_EDIT))
+
         );
-        this.edit.setBounds(Rules.WORLD_WIDTH / 2 - PaintConstants.BUTTON_SPACE, PaintConstants.SET_CONTROL_ELEMENT_HEIGHT, PaintConstants.BUTTON_WIDTH, PaintConstants.BUTTON_HEIGHT);
-        edit.addListener(new ClickListener() {
+        this.create.setBounds((Rules.WORLD_WIDTH / 4) + PaintConstants.LIST_ELEMENT_PAD / 2 - PaintConstants.BUTTON_HEIGHT - PaintConstants.LIST_ELEMENT_PAD, PaintConstants.SET_ELEMENT_HEIGHT - (PaintConstants.BUTTON_HEIGHT - PaintConstants.SET_HEIGHT), PaintConstants.BUTTON_WIDTH, PaintConstants.BUTTON_HEIGHT);
+        create.addListener(new ClickListener() {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                ConfigGroup.getInstance().showActive();
-                ProgressElement.getInstance().reset();
+                if (create.isOver()) {
+                    ListGroup.getInstance().switchVisible();
+                    ProgressGroup.getInstance().switchVisible();
+                    ProgressElement.getInstance().reset();
+                }
                 super.touchUp(event, x, y, pointer, button);
             }
-
+        });
+        create.addListener(new ClickListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 boomBox.playSound(MSConstants.UI_MENU);
@@ -78,17 +62,19 @@ public class SetControlElement extends Group {
         this.loop = new UIButton(
                 new TextureRegionDrawable(Assets.getInstance().getAtlas().findRegion(PaintConstants.BUTTON_LOOP))
         );
-        this.loop.setBounds(Rules.WORLD_WIDTH / 2 + PaintConstants.BUTTON_SPACE + PaintConstants.BUTTON_WIDTH / 2, PaintConstants.SET_CONTROL_ELEMENT_HEIGHT, PaintConstants.BUTTON_WIDTH, PaintConstants.BUTTON_HEIGHT);
+        this.loop.setBounds(3 * (Rules.WORLD_WIDTH / 4) + PaintConstants.LIST_ELEMENT_PAD, PaintConstants.SET_ELEMENT_HEIGHT - (PaintConstants.BUTTON_HEIGHT - PaintConstants.SET_HEIGHT), PaintConstants.BUTTON_WIDTH, PaintConstants.BUTTON_HEIGHT);
         loop.addListener(new ClickListener() {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                looped = !looped;
-                if (looped) {
-                    loop.setColor(Color.RED);
-                } else {
-                    loop.setColor(Color.WHITE);
-                }
                 super.touchUp(event, x, y, pointer, button);
+                if (loop.isOver()) {
+                    looped = !looped;
+                    if (looped) {
+                        loop.setColor(Color.RED);
+                    } else {
+                        loop.setColor(Color.WHITE);
+                    }
+                }
             }
 
             @Override
@@ -99,16 +85,13 @@ public class SetControlElement extends Group {
         });
 
         this.addActor(create);
-        this.addActor(edit);
         this.addActor(loop);
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
         create.draw(batch, parentAlpha);
-        edit.draw(batch, parentAlpha);
         loop.draw(batch, parentAlpha);
-
         batch.setColor(1.0f, 1.0f, 1.0f, 1.0f);
     }
 }

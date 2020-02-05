@@ -34,6 +34,7 @@ public class ProgressGroup extends Group {
     public void update() {
         SetElement.getInstance().update();
         ProgressElement.getInstance().reset();
+        ProgressControlElement.getInstance().reset();
     }
 
     public void dispose() {

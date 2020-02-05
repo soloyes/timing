@@ -9,6 +9,7 @@ import com.timing.config.MSConstants;
 import com.timing.config.PaintConstants;
 import com.timing.config.Rules;
 import com.timing.ui.blocks.UIButton;
+import com.timing.ui.element.ProgressControlElement;
 import com.timing.ui.element.SimpleListElement;
 import com.timing.ui.element.VerticalElementList;
 import com.timing.ui.mvc.profiles.ProfileDAO;
@@ -57,8 +58,11 @@ public class ConfigGroup extends Group {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 super.touchUp(event, x, y, pointer, button);
-                ListGroup.getInstance().switchVisible();
-                ConfigGroup.getInstance().switchVisible();
+                if (back.isOver()) {
+                    ListGroup.getInstance().switchVisible();
+                    ConfigGroup.getInstance().switchVisible();
+                    ProgressControlElement.getInstance().reset();
+                }
             }
 
             @Override
@@ -72,8 +76,11 @@ public class ConfigGroup extends Group {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 super.touchUp(event, x, y, pointer, button);
-                ProgressGroup.getInstance().switchVisible();
-                ConfigGroup.getInstance().switchVisible();
+                if (home.isOver()) {
+                    ProgressGroup.getInstance().switchVisible();
+                    ConfigGroup.getInstance().switchVisible();
+                    ProgressControlElement.getInstance().reset();
+                }
             }
 
             @Override
